@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ketik Arab Nonosoft Khot - Sesuai Gambar</title>
+    <title>Ketik Arab Nonosoft Khot - Sesuai Panduan</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -110,7 +110,6 @@
             transform: translateY(2px);
             box-shadow: none;
         }
-        /* Status tombol Shift aktif */
         .vk-btn.shift-active {
             background-color: #e67e22 !important;
             color: white !important;
@@ -142,20 +141,21 @@
         .vk-btn-func {
             background-color: #f1c40f;
             color: #2c3e50;
-            height: 38px;
-            font-size: 10px;
+            height: 40px;
+            font-size: 9px;
             font-family: sans-serif;
             flex: 1;
             max-width: none;
             font-weight: bold;
             border-bottom-width: 3px;
             border-color: #d4ac0d;
+            line-height: 1.2;
         }
 
         @media (max-width: 600px) {
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
             .latin-char { font-size: 8px; }
-            .vk-btn-func { font-size: 9px; height: 34px; }
+            .vk-btn-func { font-size: 8px; height: 36px; }
             textarea { height: 80px; font-size: 24px; }
         }
     </style>
@@ -163,30 +163,30 @@
 <body>
 
 <div class="container">
-    <h2>Ketik Arab Nonosoft Khot (Sesuai Gambar)</h2>
+    <h2>Ketik Arab Nonosoft Khot (Sesuai Panduan)</h2>
 
     <div class="toolbar">
         <button class="btn-action" onclick="clearText()">Hapus Semua</button>
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">← Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" placeholder="Sentuh tombol di bawah untuk mengetik..."></textarea>
+    <textarea id="arabicInput" placeholder="Sentuh huruf, lalu pilih harakat di atas..."></textarea>
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Dukungan Shift Nonosoft Khot) -->
+        <!-- Baris F1 - F12 Sesuai Tabel Panduan Nonosoft Khot -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-normal="َ" data-shift="ً">F1<br>َ / ً</button>
-            <button class="vk-btn vk-btn-func" data-normal="ِ" data-shift="ٍ">F2<br>ِ / ٍ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ُ" data-shift="ٌ">F3<br>ُ / ٌ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ً" data-shift="">F4<br>ً</button>
-            <button class="vk-btn vk-btn-func" data-normal="ٍ" data-shift="">F5<br>ٍ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ٌ" data-shift="">F6<br>ٌ</button>
-            <button class="vk-btn vk-btn-func" data-normal="\u0651" data-shift="\u0651">F7<br>ّ Tasydid</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F8</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F9</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F10</button>
-            <button class="vk-btn vk-btn-func" data-normal="ْ" data-shift="">F11<br>ْ Sukun</button>
+            <button class="vk-btn vk-btn-func" data-normal="َ" data-shift="َّ">F1<br>َ / ّ+َ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ِ" data-shift="ِّ">F2<br>ِ / ّ+ِ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ُ" data-shift="ُّ">F3<br>ُ / ّ+ُ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ً" data-shift="ًّ">F4<br>ً / ّ+ً</button>
+            <button class="vk-btn vk-btn-func" data-normal="ٍ" data-shift="ٍّ">F5<br>ٍ / ّ+ٍ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ٌ" data-shift="ٌّ">F6<br>ٌ / ّ+ٌ</button>
+            <button class="vk-btn vk-btn-func" data-normal="aa" data-shift="ّaa">F7<br>aa / ّ+aa</button>
+            <button class="vk-btn vk-btn-func" data-normal="ii" data-shift="ّii">F8<br>ii / ّ+ii</button>
+            <button class="vk-btn vk-btn-func" data-normal="uu" data-shift="ّuu">F9<br>uu / ّ+uu</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="ٰ">F10<br>Mad<br>Jaiz</button>
+            <button class="vk-btn vk-btn-func" data-normal="ْ" data-shift="">F11<br>Sukun</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
         </div>
 
@@ -279,7 +279,6 @@
     
     let isShiftActive = false;
 
-    // Logika tombol Shift (bisa ditekan untuk mengaktifkan mode shift)
     shiftButtons.forEach(shiftBtn => {
         shiftBtn.addEventListener('pointerdown', function(e) {
             e.preventDefault();
@@ -291,7 +290,6 @@
         });
     });
 
-    // Logika tombol keyboard regular dan fungsi
     buttons.forEach(button => {
         let normalChar = button.getAttribute('data-normal');
         let shiftChar = button.getAttribute('data-shift');
@@ -300,13 +298,23 @@
             button.addEventListener('pointerdown', function(e) {
                 e.preventDefault();
                 
-                // Tentukan karakter yang diketik berdasarkan status Shift aktif atau tidak
-                let charToInsert = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
+                let targetChar = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
                 
-                insertText(charToInsert);
+                // Penanganan khusus untuk harakat gabungan (misal F7 dengan shift = Tasydid + alif kecil/panjang)
+                if (targetChar === 'aa') targetChar = 'َا';
+                else if (targetChar === 'ii') targetChar = 'ِي';
+                else if (targetChar === 'uu') targetChar = 'ُو';
+                else if (targetChar === 'ّaa') targetChar = 'َّا';
+                else if (targetChar === 'ّii') targetChar = 'ِّي';
+                else if (targetChar === 'ّuu') targetChar = 'ُّو';
+                else if (targetChar.startsWith('ّ') && targetChar.length > 1) {
+                    // Format Unicode untuk Tasydid (U+0651) + Harakat pilihan
+                    targetChar = '\u0651' + targetChar.substring(1);
+                }
+
+                insertText(targetChar);
                 triggerEffect(button);
 
-                // Setelah tombol diketik, otomatis matikan kembali status shift (seperti keyboard fisik)
                 if (isShiftActive) {
                     isShiftActive = false;
                     shiftButtons.forEach(sb => sb.classList.remove('shift-active'));
