@@ -168,7 +168,7 @@
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Harakat Langsung) -->
+        <!-- Baris F1 - F12 (Harakat & Tasydid) -->
         <div class="keyboard-row function-row">
             <button class="vk-btn vk-btn-func" data-char="َ">F1<br>َ Fathah</button>
             <button class="vk-btn vk-btn-func" data-char="ِ">F2<br>ِ Kasrah</button>
@@ -176,7 +176,7 @@
             <button class="vk-btn vk-btn-func" data-char="ً">F4<br>ً Fathatain</button>
             <button class="vk-btn vk-btn-func" data-char="ٍ">F5<br>ٍ Kasratain</button>
             <button class="vk-btn vk-btn-func" data-char="ٌ">F6<br>ٌ Dammatain</button>
-            <button class="vk-btn vk-btn-func" data-char="ّ">F7<br>ّ Syaddah</button>
+            <button class="vk-btn vk-btn-func" data-special="tasydid">F7<br>ّ Syaddah</button>
             <button class="vk-btn vk-btn-func" data-char="">F8</button>
             <button class="vk-btn vk-btn-func" data-char="">F9</button>
             <button class="vk-btn vk-btn-func" data-char="">F10</button>
@@ -272,11 +272,19 @@
     
     buttons.forEach(button => {
         let charToInsert = button.getAttribute('data-char');
+        let specialAction = button.getAttribute('data-special');
+
         if (charToInsert !== null && charToInsert !== '') {
-            // Menggunakan pointerdown agar sangat responsif di semua perangkat (HP & PC)
             button.addEventListener('pointerdown', function(e) {
                 e.preventDefault();
                 insertText(charToInsert);
+                triggerEffect(button);
+            });
+        } else if (specialAction === 'tasydid') {
+            // Penanganan khusus untuk Syaddah/Tasydid (Unicode U+0651)
+            button.addEventListener('pointerdown', function(e) {
+                e.preventDefault();
+                insertText('\u0651');
                 triggerEffect(button);
             });
         }
@@ -294,7 +302,6 @@
         let end = inputArea.selectionEnd;
         let val = inputArea.value;
 
-        // Tangani enter newline khusus
         if (text === '\\n') text = '\n';
 
         inputArea.value = val.substring(0, start) + text + val.substring(end);
