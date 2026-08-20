@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ketik Arab Gaya Nonosoft Khot</title>
-    <!-- Menggunakan Google Fonts untuk tampilan huruf Arab yang elegan -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f2f5;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,7 +19,7 @@
             width: 100%;
             max-width: 800px;
             background: white;
-            padding: 25px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
@@ -28,24 +27,16 @@
             color: #2c3e50;
             margin-top: 0;
             text-align: center;
-        }
-        .instructions {
-            background: #e8f4fd;
-            border-left: 4px solid #3498db;
-            padding: 12px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #2980b9;
-            line-height: 1.5;
+            font-size: 20px;
         }
         textarea {
             width: 100%;
-            height: 150px;
+            height: 120px;
             font-family: 'Amiri', serif;
-            font-size: 28px;
+            font-size: 26px;
             direction: rtl;
             text-align: right;
-            padding: 15px;
+            padding: 12px;
             border: 2px solid #cbd5e1;
             border-radius: 8px;
             resize: vertical;
@@ -59,122 +50,125 @@
         .toolbar {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin-top: 10px;
             align-items: center;
         }
         .btn-action {
             background-color: #e74c3c;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.2s;
         }
-        .btn-action:hover {
-            background-color: #c0392b;
+        .keyboard-section {
+            margin-top: 15px;
         }
-        .harakat-guide {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 8px;
+        .section-title {
             font-size: 13px;
-        }
-        .guide-item {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 8px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .guide-item span {
             font-weight: bold;
-            color: #d97706;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+        .virtual-keyboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .vk-btn {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 10px 0;
+            text-align: center;
+            font-family: 'Amiri', serif;
+            font-size: 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: background 0.1s;
+        }
+        .vk-btn:active {
+            background-color: #cbd5e1;
+        }
+        .harakat-key {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: bold;
+        }
+        .space-key {
+            grid-column: span 4;
+            background-color: #f1f5f9;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Simulasi Pengetikan Nonosoft Khot</h2>
-    
-    <div class="instructions">
-        <strong>Panduan Penggunaan (Mode Standar):</strong><br>
-        • Ketik huruf Latin biasa (contoh: <code>b</code> jadi $\text{ب}$, <code>t</code> jadi $\text{ت}$, dsb) yang otomatis terkonversi ke Hijaiyah.<br>
-        • Tekan tombol fungsi <strong>F1 hingga F11</strong> untuk memasukkan harakat/tanda baca sebelum atau sesudah huruf.<br>
-        • Gunakan tombol <strong>Spasi</strong> untuk spasi normal.
-    </div>
+    <h2>Ketik Arab Nonosoft Khot (HP & PC)</h2>
 
-    <textarea id="arabicInput" placeholder="Ketik di sini... (Contoh: b + F1 + d + F2 = بَدَ)"></textarea>
+    <textarea id="arabicInput" placeholder="Ketik di sini atau klik tombol di bawah..."></textarea>
 
     <div class="toolbar">
         <button class="btn-action" onclick="clearText()">Hapus Semua</button>
-        <span style="font-size: 13px; color: #64748b;">Layout: Nonosoft Khot Standar Custom</span>
+        <button class="btn-action" style="background-color: #3b82f6;" onclick="insertSpace()">Spasi</button>
     </div>
 
-    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+    <!-- Tombol Harakat Virtual -->
+    <div class="keyboard-section">
+        <div class="section-title">Harakat & Tanda Baca:</div>
+        <div class="virtual-keyboard">
+            <button class="vk-btn harakat-key" onclick="insertText('\u064E')">َ (Fathah)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u0650')">ِ (Kasrah)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u064F')">ُ (Dammah)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u064B')">ً (Fathatain)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u064C')">ٍ (Kasratain)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u064D')">ٌ (Dammatain)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u0651')">ّ (Syaddah)</button>
+            <button class="vk-btn harakat-key" onclick="insertText('\u0652')">ْ (Sukun)</button>
+        </div>
+    </div>
 
-    <div style="font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #475569;">Pintasan Harakat (Tombol F):</div>
-    <div class="harakat-guide">
-        <div class="guide-item">F1: Fathah (َ)</div>
-        <div class="guide-item">F2: Kasrah (ِ)</div>
-        <div class="guide-item">F3: Dammah (ُ)</div>
-        <div class="guide-item">F4: Fathatain (ً)</div>
-        <div class="guide-item">F5: Kasratain (ٍ)</div>
-        <div class="guide-item">F6: Dammatain (ٌ)</div>
-        <div class="guide-item">F7: Syaddah (ّ)</div>
-        <div class="guide-item">F11: Sukun (ْ)</div>
+    <!-- Tombol Huruf Hijaiyah Virtual -->
+    <div class="keyboard-section">
+        <div class="section-title">Huruf Hijaiyah:</div>
+        <div class="virtual-keyboard" id="hijaiyahKeyboard"></div>
     </div>
 </div>
 
 <script>
-    // Pemetaan Keyboard Nonosoft Khot Mode Standar (Huruf Latin ke Hijaiyah)
-    const mapNonosoft = {
-        'a': 'ا', 'b': 'ب', 't': 'ت', 'v': 'ث', 'j': 'ج', 'H': 'ح', 'x': 'خ',
-        'd': 'د', 'z': 'ذ', 'r': 'ر', 'j': 'ز', 's': 'س', '$': 'ش', 'S': 'ص',
-        'D': 'ض', 'T': 'ط', 'Z': 'ظ', 'e': 'ع', 'g': 'غ', 'f': 'ف', 'q': 'ق',
-        'k': 'ك', 'l': 'ل', 'm': 'م', 'n': 'ن', 'h': 'ه', 'w': 'و', 'y': 'ي',
-        'p': 'ة', 'i': 'ي', 'u': 'ؤ', 'o': 'ء', 'A': 'أ', 'I': 'إ'
-    };
+    // Daftar huruf sesuai urutan tata letak Nonosoft Khot Standar
+    const letters = [
+        'ا', 'ب', 'ت', 'ث', 'ج', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 
+        'س', 'ش', 'ص', 'ض', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ك', 
+        'ل', 'م', 'ن', 'ه', 'و', 'ي', 'ة', 'ؤ', 'ء', 'أ', 'إ'
+    ];
 
-    // Pemetaan Tombol Harakat F1 - F11 ala Nonosoft Khot
-    const mapHarakat = {
-        'F1': '\u064E', // Fathah
-        'F2': '\u0650', // Kasrah
-        'F3': '\u064F', // Dammah
-        'F4': '\u064B', // Fathatain
-        'F5': '\u064C', // Kasratain
-        'F6': '\u064D', // Dammatain
-        'F7': '\u0651', // Syaddah
-        'F11': '\u0652' // Sukun
-    };
-
+    const container = document.getElementById('hijaiyahKeyboard');
     const inputArea = document.getElementById('arabicInput');
 
-    inputArea.addEventListener('keydown', function(event) {
-        let key = event.key;
-
-        // Cek jika tombol F1-F12 ditekan
-        if (mapHarakat[key]) {
-            event.preventDefault();
-            insertAtCursor(mapHarakat[key]);
-        } 
-        // Cek jika huruf Latin terdaftar di mapping Nonosoft Khot
-        else if (mapNonosoft[key]) {
-            event.preventDefault();
-            insertAtCursor(mapNonosoft[key]);
-        }
+    // Generate tombol huruf secara otomatis
+    letters.forEach(char => {
+        let btn = document.createElement('button');
+        btn.className = 'vk-btn';
+        btn.innerText = char;
+        btn.onclick = () => insertText(char);
+        container.appendChild(btn);
     });
 
-    function insertAtCursor(text) {
+    function insertText(text) {
         let start = inputArea.selectionStart;
         let end = inputArea.selectionEnd;
         let val = inputArea.value;
 
         inputArea.value = val.substring(0, start) + text + val.substring(end);
         inputArea.selectionStart = inputArea.selectionEnd = start + text.length;
+        inputArea.focus();
+    }
+
+    function insertSpace() {
+        insertText(' ');
     }
 
     function clearText() {
