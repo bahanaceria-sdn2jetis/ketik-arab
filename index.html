@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ketik Arab Nonosoft Khot - QWERTY Layout</title>
+    <title>Ketik Arab Nonosoft Khot - Sesuai Gambar</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -15,6 +15,7 @@
             flex-direction: column;
             align-items: center;
             color: #ecf0f1;
+            touch-action: manipulation;
         }
         .container {
             width: 100%;
@@ -46,6 +47,23 @@
             margin-bottom: 10px;
             color: #000;
         }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .btn-action {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .btn-action:active { background-color: #922b21; }
+
         /* --- Area Keyboard Virtual --- */
         .keyboard-layout {
             background-color: #95a5a6; 
@@ -85,13 +103,13 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
-        .vk-btn:active {
+        .vk-btn:active, .vk-btn.touched {
             background-color: #bdc3c7;
             border-bottom-width: 1px;
             transform: translateY(2px);
             box-shadow: none;
         }
-        /* Huruf Latin kecil penanda di pojok tombol */
+        /* Huruf Latin kecil penanda di pojok tombol (sesuai gambar) */
         .latin-char {
             font-family: sans-serif;
             font-size: 9px;
@@ -101,10 +119,10 @@
             left: 3px;
         }
         
-        /* Tombol khusus dengan ukuran berbeda */
-        .btn-wide { flex: 1.5; max-width: 75px; font-size: 13px; font-family: sans-serif; }
-        .btn-wider { flex: 1.8; max-width: 85px; font-size: 13px; font-family: sans-serif; }
-        .btn-widest { flex: 2.2; max-width: 100px; font-size: 13px; font-family: sans-serif; }
+        /* Ukuran tombol khusus */
+        .btn-wide { flex: 1.5; max-width: 75px; font-size: 12px; font-family: sans-serif; }
+        .btn-wider { flex: 1.8; max-width: 85px; font-size: 12px; font-family: sans-serif; }
+        .btn-widest { flex: 2.2; max-width: 100px; font-size: 12px; font-family: sans-serif; }
         .btn-space { flex: 6; max-width: 320px; height: 45px; font-family: sans-serif; font-size: 14px; }
         
         /* Baris Tombol Fungsi F1-F12 */
@@ -119,29 +137,12 @@
             background-color: #bdc3c7;
             color: #111;
             height: 32px;
-            font-size: 11px;
+            font-size: 10px;
             font-family: sans-serif;
             flex: 1;
             max-width: none;
             font-weight: bold;
         }
-
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .btn-action {
-            background-color: #c0392b;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 13px;
-        }
-        .btn-action:hover { background-color: #922b21; }
 
         @media (max-width: 600px) {
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
@@ -154,111 +155,111 @@
 <body>
 
 <div class="container">
-    <h2>Ketik Arab Nonosoft Khot (QWERTY Layout)</h2>
+    <h2>Ketik Arab Nonosoft Khot (Sesuai Layout Gambar)</h2>
 
     <div class="toolbar">
         <button class="btn-action" onclick="clearText()">Hapus Semua</button>
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">← Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" placeholder="Ketuk tombol di bawah untuk mengetik..."></textarea>
+    <textarea id="arabicInput" placeholder="Sentuh tombol di bawah untuk mengetik..."></textarea>
 
-    <!-- Area Keyboard Virtual Berdasarkan Layout Gambar Nonosoft QWERTY -->
+    <!-- Area Keyboard Virtual Berdasarkan Susunan Gambar Asli -->
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Harakat & Lainnya) -->
+        <!-- Baris F1 - F12 (Harakat) -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u064E')">F1<br>َ Fathah</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u0650')">F2<br>ِ Kasrah</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u064F')">F3<br>ُ Dammah</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u064B')">F4<br>ً Fathatain</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u064C')">F5<br>ٍ Kasratain</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u064D')">F6<br>ٌ Dammatain</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u0651')">F7<br>ّ Syaddah</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('')">F8</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('')">F9</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('')">F10</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('\u0652')">F11<br>ْ Sukun</button>
-            <button class="vk-btn vk-btn-func" onclick="insertText('')">F12</button>
+            <button class="vk-btn vk-btn-func" data-char="\u064E">F1<br>َ Fathah</button>
+            <button class="vk-btn vk-btn-func" data-char="\u0650">F2<br>ِ Kasrah</button>
+            <button class="vk-btn vk-btn-func" data-char="\u064F">F3<br>ُ Dammah</button>
+            <button class="vk-btn vk-btn-func" data-char="\u064B">F4<br>ً Fathatain</button>
+            <button class="vk-btn vk-btn-func" data-char="\u064C">F5<br>ٍ Kasratain</button>
+            <button class="vk-btn vk-btn-func" data-char="\u064D">F6<br>ٌ Dammatain</button>
+            <button class="vk-btn vk-btn-func" data-char="\u0651">F7<br>ّ Syaddah</button>
+            <button class="vk-btn vk-btn-func" data-char="">F8</button>
+            <button class="vk-btn vk-btn-func" data-char="">F9</button>
+            <button class="vk-btn vk-btn-func" data-char="">F10</button>
+            <button class="vk-btn vk-btn-func" data-char="\u0652">F11<br>ْ Sukun</button>
+            <button class="vk-btn vk-btn-func" data-char="">F12</button>
         </div>
 
-        <!-- Baris Angka & Simbol Atas -->
+        <!-- Baris Angka & Simbol Atas (Sesuai Gambar) -->
         <div class="keyboard-row">
-            <button class="vk-btn" onclick="insertText('ى')">ى<span class="latin-char">`</span></button>
-            <button class="vk-btn" onclick="insertText('١')">١<span class="latin-char">1</span></button>
-            <button class="vk-btn" onclick="insertText('٢')">٢<span class="latin-char">2</span></button>
-            <button class="vk-btn" onclick="insertText('٣')">٣<span class="latin-char">3</span></button>
-            <button class="vk-btn" onclick="insertText('٤')">٤<span class="latin-char">4</span></button>
-            <button class="vk-btn" onclick="insertText('٥')">٥<span class="latin-char">5</span></button>
-            <button class="vk-btn" onclick="insertText('٦')">٦<span class="latin-char">6</span></button>
-            <button class="vk-btn" onclick="insertText('٧')">٧<span class="latin-char">7</span></button>
-            <button class="vk-btn" onclick="insertText('٨')">٨<span class="latin-char">8</span></button>
-            <button class="vk-btn" onclick="insertText('٩')">٩<span class="latin-char">9</span></button>
-            <button class="vk-btn" onclick="insertText('٠')">٠<span class="latin-char">0</span></button>
-            <button class="vk-btn" onclick="insertText('-')">-<span class="latin-char">-</span></button>
-            <button class="vk-btn" onclick="insertText('=')">=<span class="latin-char">=</span></button>
-            <button class="vk-btn btn-wide" onclick="backspace()">Backspace</button>
+            <button class="vk-btn" data-char="ى">ى<span class="latin-char">`</span></button>
+            <button class="vk-btn" data-char="١">١<span class="latin-char">1</span></button>
+            <button class="vk-btn" data-char="٢">٢<span class="latin-char">2</span></button>
+            <button class="vk-btn" data-char="٣">٣<span class="latin-char">3</span></button>
+            <button class="vk-btn" data-char="٤">٤<span class="latin-char">4</span></button>
+            <button class="vk-btn" data-char="٥">٥<span class="latin-char">5</span></button>
+            <button class="vk-btn" data-char="٦">٦<span class="latin-char">6</span></button>
+            <button class="vk-btn" data-char="٧">٧<span class="latin-char">7</span></button>
+            <button class="vk-btn" data-char="٨">٨<span class="latin-char">8</span></button>
+            <button class="vk-btn" data-char="٩">٩<span class="latin-char">9</span></button>
+            <button class="vk-btn" data-char="٠">٠<span class="latin-char">0</span></button>
+            <button class="vk-btn" data-char="-">-<span class="latin-char">-</span></button>
+            <button class="vk-btn" data-char="=">=<span class="latin-char">=</span></button>
+            <button class="vk-btn btn-wide" onclick="backspace()">Back</button>
         </div>
 
-        <!-- Baris QWERTY (Q W E R T Y U I O P [ ]) -->
+        <!-- Baris ke-2: Q W E R T Y U I O P [ ] \ (Sesuai Gambar Nonosoft) -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wide" onclick="insertText('\t')">Tab</button>
-            <button class="vk-btn" onclick="insertText('ق')">ق<span class="latin-char">Q</span></button>
-            <button class="vk-btn" onclick="insertText('و')">و<span class="latin-char">W</span></button>
-            <button class="vk-btn" onclick="insertText('ع')">ع<span class="latin-char">E</span></button>
-            <button class="vk-btn" onclick="insertText('ر')">ر<span class="latin-char">R</span></button>
-            <button class="vk-btn" onclick="insertText('ت')">ت<span class="latin-char">T</span></button>
-            <button class="vk-btn" onclick="insertText('ي')">ي<span class="latin-char">Y</span></button>
-            <button class="vk-btn" onclick="insertText('ث')">ث<span class="latin-char">U</span></button>
-            <button class="vk-btn" onclick="insertText('ء')">ء<span class="latin-char">I</span></button>
-            <button class="vk-btn" onclick="insertText('خ')">خ<span class="latin-char">O</span></button>
-            <button class="vk-btn" onclick="insertText('ح')">ح<span class="latin-char">P</span></button>
-            <button class="vk-btn" onclick="insertText('ج')">ج<span class="latin-char">[</span></button>
-            <button class="vk-btn" onclick="insertText('د')">د<span class="latin-char">]</span></button>
-            <button class="vk-btn btn-wide" onclick="insertText('\\')">\</button>
+            <button class="vk-btn btn-wide" data-char="">Tab</button>
+            <button class="vk-btn" data-char="ق">ق<span class="latin-char">Q</span></button>
+            <button class="vk-btn" data-char="و">و<span class="latin-char">W</span></button>
+            <button class="vk-btn" data-char="ع">ع<span class="latin-char">E</span></button>
+            <button class="vk-btn" data-char="ر">ر<span class="latin-char">R</span></button>
+            <button class="vk-btn" data-char="ت">ت<span class="latin-char">T</span></button>
+            <button class="vk-btn" data-char="ي">ي<span class="latin-char">Y</span></button>
+            <button class="vk-btn" data-char="ث">ث<span class="latin-char">U</span></button>
+            <button class="vk-btn" data-char="ء">ء<span class="latin-char">I</span></button>
+            <button class="vk-btn" data-char="خ">خ<span class="latin-char">O</span></button>
+            <button class="vk-btn" data-char="ح">ح<span class="latin-char">P</span></button>
+            <button class="vk-btn" data-char="ض">ض<span class="latin-char">[</span></button>
+            <button class="vk-btn" data-char="ص">ص<span class="latin-char">]</span></button>
+            <button class="vk-btn btn-wide" data-char="\">\</button>
         </div>
 
-        <!-- Baris ASDFGH (A S D F G H J K L ; ') -->
+        <!-- Baris ke-3: A S D F G H J K L ; ' Enter (Sesuai Gambar Nonosoft) -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wider" onclick="insertText('')">Caps</button>
-            <button class="vk-btn" onclick="insertText('ش')">ش<span class="latin-char">A</span></button>
-            <button class="vk-btn" onclick="insertText('س')">س<span class="latin-char">S</span></button>
-            <button class="vk-btn" onclick="insertText('ي')">ي<span class="latin-char">D</span></button>
-            <button class="vk-btn" onclick="insertText('ب')">ب<span class="latin-char">F</span></button>
-            <button class="vk-btn" onclick="insertText('ل')">ل<span class="latin-char">G</span></button>
-            <button class="vk-btn" onclick="insertText('ا')">ا<span class="latin-char">H</span></button>
-            <button class="vk-btn" onclick="insertText('ت')">ت<span class="latin-char">J</span></button>
-            <button class="vk-btn" onclick="insertText('ن')">ن<span class="latin-char">K</span></button>
-            <button class="vk-btn" onclick="insertText('م')">م<span class="latin-char">L</span></button>
-            <button class="vk-btn" onclick="insertText('ك')">ك<span class="latin-char">;</span></button>
-            <button class="vk-btn" onclick="insertText('ة')">ة<span class="latin-char">'</span></button>
-            <button class="vk-btn btn-widest" onclick="insertText('\n')">Enter ↵</button>
+            <button class="vk-btn btn-wider" data-char="">Caps</button>
+            <button class="vk-btn" data-char="ا">ا<span class="latin-char">A</span></button>
+            <button class="vk-btn" data-char="س">س<span class="latin-char">S</span></button>
+            <button class="vk-btn" data-char="د">د<span class="latin-char">D</span></button>
+            <button class="vk-btn" data-char="ف">ف<span class="latin-char">F</span></button>
+            <button class="vk-btn" data-char="غ">غ<span class="latin-char">G</span></button>
+            <button class="vk-btn" data-char="ه">ه<span class="latin-char">H</span></button>
+            <button class="vk-btn" data-char="ج">ج<span class="latin-char">J</span></button>
+            <button class="vk-btn" data-char="ك">ك<span class="latin-char">K</span></button>
+            <button class="vk-btn" data-char="ل">ل<span class="latin-char">L</span></button>
+            <button class="vk-btn" data-char="ظ">ظ<span class="latin-char">;</span></button>
+            <button class="vk-btn" data-char="ط">ط<span class="latin-char">'</span></button>
+            <button class="vk-btn btn-widest" data-char="\n">Enter ↵</button>
         </div>
 
-        <!-- Baris ZXCVBN (Z X C V B N M , . /) -->
+        <!-- Baris ke-4: Shift Z X C V B N M , . / Shift (Sesuai Gambar Nonosoft) -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-widest" onclick="insertText('')">Shift</button>
-            <button class="vk-btn" onclick="insertText('ظ')">ظ<span class="latin-char">Z</span></button>
-            <button class="vk-btn" onclick="insertText('ط')">ط<span class="latin-char">X</span></button>
-            <button class="vk-btn" onclick="insertText('ذ')">ذ<span class="latin-char">C</span></button>
-            <button class="vk-btn" onclick="insertText('ء')">ء<span class="latin-char">V</span></button>
-            <button class="vk-btn" onclick="insertText('ؤ')">ؤ<span class="latin-char">B</span></button>
-            <button class="vk-btn" onclick="insertText('إ')">إ<span class="latin-char">N</span></button>
-            <button class="vk-btn" onclick="insertText('أ')">أ<span class="latin-char">M</span></button>
-            <button class="vk-btn" onclick="insertText('ئ')">ئ<span class="latin-char">,</span></button>
-            <button class="vk-btn" onclick="insertText('ء')">ء<span class="latin-char">.</span></button>
-            <button class="vk-btn" onclick="insertText('ء')">ء<span class="latin-char">/</span></button>
-            <button class="vk-btn btn-widest" onclick="insertText('')">Shift</button>
+            <button class="vk-btn btn-widest" data-char="">Shift</button>
+            <button class="vk-btn" data-char="ز">ز<span class="latin-char">Z</span></button>
+            <button class="vk-btn" data-char="ل">ل<span class="latin-char">X</span></button>
+            <button class="vk-btn" data-char="ذ">ذ<span class="latin-char">C</span></button>
+            <button class="vk-btn" data-char="ب">ب<span class="latin-char">V</span></button>
+            <button class="vk-btn" data-char="ش">ش<span class="latin-char">B</span></button>
+            <button class="vk-btn" data-char="ن">ن<span class="latin-char">N</span></button>
+            <button class="vk-btn" data-char="م">م<span class="latin-char">M</span></button>
+            <button class="vk-btn" data-char="ة">ة<span class="latin-char">,</span></button>
+            <button class="vk-btn" data-char="ؤ">ؤ<span class="latin-char">.</span></button>
+            <button class="vk-btn" data-char="ؤ">ؤ<span class="latin-char">/</span></button>
+            <button class="vk-btn btn-widest" data-char="">Shift</button>
         </div>
 
         <!-- Baris Bawah (Spasi, dll) -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wide" onclick="insertText('')">Ctrl</button>
-            <button class="vk-btn btn-wide" onclick="insertText('')">Win</button>
-            <button class="vk-btn btn-wide" onclick="insertText('')">Alt</button>
-            <button class="vk-btn btn-space" onclick="insertText(' ')">Spasi (Space)</button>
-            <button class="vk-btn btn-wide" onclick="insertText('')">Alt</button>
-            <button class="vk-btn btn-wide" onclick="insertText('')">Ctrl</button>
+            <button class="vk-btn btn-wide" data-char="">Ctrl</button>
+            <button class="vk-btn btn-wide" data-char="">Win</button>
+            <button class="vk-btn btn-wide" data-char="">Alt</button>
+            <button class="vk-btn btn-space" data-char=" ">Spasi (Space)</button>
+            <button class="vk-btn btn-wide" data-char="">Alt</button>
+            <button class="vk-btn btn-wide" data-char="">Ctrl</button>
         </div>
 
     </div>
@@ -267,7 +268,34 @@
 <script>
     const inputArea = document.getElementById('arabicInput');
 
-    // Fungsi memasukkan huruf/harakat persis di posisi kursor aktif
+    // Menggunakan event listener berbasis 'touchstart' dan 'click' agar sangat responsif di HP
+    const buttons = document.querySelectorAll('.vk-btn');
+    
+    buttons.forEach(button => {
+        let charToInsert = button.getAttribute('data-char');
+        if (charToInsert !== null && charToInsert !== '') {
+            // Mencegah penundaan klik di perangkat mobile (touch delay)
+            button.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                insertText(charToInsert);
+                triggerEffect(button);
+            });
+            button.addEventListener('click', function(e) {
+                // Hanya jalankan jika bukan dari sentuhan untuk menghindari double trigger di beberapa browser
+                if (!e.sourceCapabilities || !e.sourceCapabilities.firesTouchEvents) {
+                    insertText(charToInsert);
+                }
+            });
+        }
+    });
+
+    function triggerEffect(btn) {
+        btn.classList.add('touched');
+        setTimeout(() => {
+            btn.classList.remove('touched');
+        }, 150);
+    }
+
     function insertText(text) {
         let start = inputArea.selectionStart;
         let end = inputArea.selectionEnd;
@@ -278,25 +306,21 @@
         inputArea.focus();
     }
 
-    // Fungsi tombol Backspace virtual
     function backspace() {
         let start = inputArea.selectionStart;
         let end = inputArea.selectionEnd;
         let val = inputArea.value;
 
         if (start !== end) {
-            // Jika ada teks yang diseleksi, hapus bagian itu
             inputArea.value = val.substring(0, start) + val.substring(end);
             inputArea.selectionStart = inputArea.selectionEnd = start;
         } else if (start > 0) {
-            // Jika tidak ada seleksi, hapus 1 karakter sebelum kursor
             inputArea.value = val.substring(0, start - 1) + val.substring(end);
             inputArea.selectionStart = inputArea.selectionEnd = start - 1;
         }
         inputArea.focus();
     }
 
-    // Fungsi hapus semua isi teks
     function clearText() {
         inputArea.value = '';
         inputArea.focus();
