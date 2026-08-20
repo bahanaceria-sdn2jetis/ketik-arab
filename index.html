@@ -102,6 +102,7 @@
             padding: 0;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            touch-action: manipulation;
         }
         .vk-btn:active, .vk-btn.touched {
             background-color: #bdc3c7;
@@ -124,7 +125,7 @@
         .btn-widest { flex: 2.2; max-width: 100px; font-size: 12px; font-family: sans-serif; }
         .btn-space { flex: 6; max-width: 320px; height: 45px; font-family: sans-serif; font-size: 14px; }
         
-        /* Baris Tombol Fungsi F1-F12 */
+        /* Baris Tombol Fungsi F1-F12 (Harakat) */
         .function-row {
             justify-content: space-between;
             margin-bottom: 10px;
@@ -135,7 +136,7 @@
         .vk-btn-func {
             background-color: #f1c40f;
             color: #2c3e50;
-            height: 36px;
+            height: 38px;
             font-size: 10px;
             font-family: sans-serif;
             flex: 1;
@@ -148,7 +149,7 @@
         @media (max-width: 600px) {
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
             .latin-char { font-size: 8px; }
-            .vk-btn-func { font-size: 9px; height: 32px; }
+            .vk-btn-func { font-size: 9px; height: 34px; }
             textarea { height: 80px; font-size: 24px; }
         }
     </style>
@@ -167,19 +168,19 @@
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Harakat Nonosoft Khot) -->
+        <!-- Baris F1 - F12 (Harakat Langsung) -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-char="\u064E">F1<br>َ Fathah</button>
-            <button class="vk-btn vk-btn-func" data-char="\u0650">F2<br>ِ Kasrah</button>
-            <button class="vk-btn vk-btn-func" data-char="\u064F">F3<br>ُ Dammah</button>
-            <button class="vk-btn vk-btn-func" data-char="\u064B">F4<br>ً Fathatain</button>
-            <button class="vk-btn vk-btn-func" data-char="\u064C">F5<br>ٍ Kasratain</button>
-            <button class="vk-btn vk-btn-func" data-char="\u064D">F6<br>ٌ Dammatain</button>
-            <button class="vk-btn vk-btn-func" data-char="\u0651">F7<br>ّ Syaddah</button>
+            <button class="vk-btn vk-btn-func" data-char="َ">F1<br>َ Fathah</button>
+            <button class="vk-btn vk-btn-func" data-char="ِ">F2<br>ِ Kasrah</button>
+            <button class="vk-btn vk-btn-func" data-char="ُ">F3<br>ُ Dammah</button>
+            <button class="vk-btn vk-btn-func" data-char="ً">F4<br>ً Fathatain</button>
+            <button class="vk-btn vk-btn-func" data-char="ٍ">F5<br>ٍ Kasratain</button>
+            <button class="vk-btn vk-btn-func" data-char="ٌ">F6<br>ٌ Dammatain</button>
+            <button class="vk-btn vk-btn-func" data-char="ّ">F7<br>ّ Syaddah</button>
             <button class="vk-btn vk-btn-func" data-char="">F8</button>
             <button class="vk-btn vk-btn-func" data-char="">F9</button>
             <button class="vk-btn vk-btn-func" data-char="">F10</button>
-            <button class="vk-btn vk-btn-func" data-char="\u0652">F11<br>ْ Sukun</button>
+            <button class="vk-btn vk-btn-func" data-char="ْ">F11<br>ْ Sukun</button>
             <button class="vk-btn vk-btn-func" data-char="">F12</button>
         </div>
 
@@ -272,15 +273,12 @@
     buttons.forEach(button => {
         let charToInsert = button.getAttribute('data-char');
         if (charToInsert !== null && charToInsert !== '') {
-            // Menggunakan fungsi mousedown & touchstart agar langsung merespons di HP maupun PC
-            const handlePress = (e) => {
+            // Menggunakan pointerdown agar sangat responsif di semua perangkat (HP & PC)
+            button.addEventListener('pointerdown', function(e) {
                 e.preventDefault();
                 insertText(charToInsert);
                 triggerEffect(button);
-            };
-
-            button.addEventListener('touchstart', handlePress, {passive: false});
-            button.addEventListener('mousedown', handlePress);
+            });
         }
     });
 
@@ -295,6 +293,9 @@
         let start = inputArea.selectionStart;
         let end = inputArea.selectionEnd;
         let val = inputArea.value;
+
+        // Tangani enter newline khusus
+        if (text === '\\n') text = '\n';
 
         inputArea.value = val.substring(0, start) + text + val.substring(end);
         inputArea.selectionStart = inputArea.selectionEnd = start + text.length;
