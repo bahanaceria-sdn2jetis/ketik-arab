@@ -110,6 +110,12 @@
             transform: translateY(2px);
             box-shadow: none;
         }
+        /* Status tombol Shift aktif */
+        .vk-btn.shift-active {
+            background-color: #e67e22 !important;
+            color: white !important;
+            border-color: #d35400 !important;
+        }
         .latin-char {
             font-family: sans-serif;
             font-size: 9px;
@@ -125,7 +131,7 @@
         .btn-widest { flex: 2.2; max-width: 100px; font-size: 12px; font-family: sans-serif; }
         .btn-space { flex: 6; max-width: 320px; height: 45px; font-family: sans-serif; font-size: 14px; }
         
-        /* Baris Tombol Fungsi F1-F12 (Harakat) */
+        /* Baris Tombol Fungsi F1-F12 */
         .function-row {
             justify-content: space-between;
             margin-bottom: 10px;
@@ -168,99 +174,99 @@
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Harakat & Tasydid) -->
+        <!-- Baris F1 - F12 (Dukungan Shift Nonosoft Khot) -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-char="َ">F1<br>َ Fathah</button>
-            <button class="vk-btn vk-btn-func" data-char="ِ">F2<br>ِ Kasrah</button>
-            <button class="vk-btn vk-btn-func" data-char="ُ">F3<br>ُ Dammah</button>
-            <button class="vk-btn vk-btn-func" data-char="ً">F4<br>ً Fathatain</button>
-            <button class="vk-btn vk-btn-func" data-char="ٍ">F5<br>ٍ Kasratain</button>
-            <button class="vk-btn vk-btn-func" data-char="ٌ">F6<br>ٌ Dammatain</button>
-            <button class="vk-btn vk-btn-func" data-special="tasydid">F7<br>ّ Syaddah</button>
-            <button class="vk-btn vk-btn-func" data-char="">F8</button>
-            <button class="vk-btn vk-btn-func" data-char="">F9</button>
-            <button class="vk-btn vk-btn-func" data-char="">F10</button>
-            <button class="vk-btn vk-btn-func" data-char="ْ">F11<br>ْ Sukun</button>
-            <button class="vk-btn vk-btn-func" data-char="">F12</button>
+            <button class="vk-btn vk-btn-func" data-normal="َ" data-shift="ً">F1<br>َ / ً</button>
+            <button class="vk-btn vk-btn-func" data-normal="ِ" data-shift="ٍ">F2<br>ِ / ٍ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ُ" data-shift="ٌ">F3<br>ُ / ٌ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ً" data-shift="">F4<br>ً</button>
+            <button class="vk-btn vk-btn-func" data-normal="ٍ" data-shift="">F5<br>ٍ</button>
+            <button class="vk-btn vk-btn-func" data-normal="ٌ" data-shift="">F6<br>ٌ</button>
+            <button class="vk-btn vk-btn-func" data-normal="\u0651" data-shift="\u0651">F7<br>ّ Tasydid</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F8</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F9</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F10</button>
+            <button class="vk-btn vk-btn-func" data-normal="ْ" data-shift="">F11<br>ْ Sukun</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
         </div>
 
         <!-- Baris Angka & Simbol Atas -->
         <div class="keyboard-row">
-            <button class="vk-btn" data-char="ى">ى<span class="latin-char">`</span></button>
-            <button class="vk-btn" data-char="١">١<span class="latin-char">1</span></button>
-            <button class="vk-btn" data-char="٢">٢<span class="latin-char">2</span></button>
-            <button class="vk-btn" data-char="٣">٣<span class="latin-char">3</span></button>
-            <button class="vk-btn" data-char="٤">٤<span class="latin-char">4</span></button>
-            <button class="vk-btn" data-char="٥">٥<span class="latin-char">5</span></button>
-            <button class="vk-btn" data-char="٦">٦<span class="latin-char">6</span></button>
-            <button class="vk-btn" data-char="٧">٧<span class="latin-char">7</span></button>
-            <button class="vk-btn" data-char="٨">٨<span class="latin-char">8</span></button>
-            <button class="vk-btn" data-char="٩">٩<span class="latin-char">9</span></button>
-            <button class="vk-btn" data-char="٠">٠<span class="latin-char">0</span></button>
-            <button class="vk-btn" data-char="-">-<span class="latin-char">-</span></button>
-            <button class="vk-btn" data-char="=">=<span class="latin-char">=</span></button>
+            <button class="vk-btn" data-normal="ى" data-shift="~">ى<span class="latin-char">`</span></button>
+            <button class="vk-btn" data-normal="١" data-shift="!">١<span class="latin-char">1</span></button>
+            <button class="vk-btn" data-normal="٢" data-shift="@">٢<span class="latin-char">2</span></button>
+            <button class="vk-btn" data-normal="٣" data-shift="#">٣<span class="latin-char">3</span></button>
+            <button class="vk-btn" data-normal="٤" data-shift="$">٤<span class="latin-char">4</span></button>
+            <button class="vk-btn" data-normal="٥" data-shift="%">٥<span class="latin-char">5</span></button>
+            <button class="vk-btn" data-normal="٦" data-shift="^">٦<span class="latin-char">6</span></button>
+            <button class="vk-btn" data-normal="٧" data-shift="&">٧<span class="latin-char">7</span></button>
+            <button class="vk-btn" data-normal="٨" data-shift="*">٨<span class="latin-char">8</span></button>
+            <button class="vk-btn" data-normal="٩" data-shift="(">٩<span class="latin-char">9</span></button>
+            <button class="vk-btn" data-normal="٠" data-shift=")">٠<span class="latin-char">0</span></button>
+            <button class="vk-btn" data-normal="-" data-shift="_">-<span class="latin-char">-</span></button>
+            <button class="vk-btn" data-normal="=" data-shift="+">=<span class="latin-char">=</span></button>
             <button class="vk-btn btn-wide" onclick="backspace()">Back</button>
         </div>
 
         <!-- Baris ke-2: Q W E R T Y U I O P [ ] \ -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wide" data-char="">Tab</button>
-            <button class="vk-btn" data-char="ق">ق<span class="latin-char">Q</span></button>
-            <button class="vk-btn" data-char="و">و<span class="latin-char">W</span></button>
-            <button class="vk-btn" data-char="ع">ع<span class="latin-char">E</span></button>
-            <button class="vk-btn" data-char="ر">ر<span class="latin-char">R</span></button>
-            <button class="vk-btn" data-char="ت">ت<span class="latin-char">T</span></button>
-            <button class="vk-btn" data-char="ي">ي<span class="latin-char">Y</span></button>
-            <button class="vk-btn" data-char="ث">ث<span class="latin-char">U</span></button>
-            <button class="vk-btn" data-char="ء">ء<span class="latin-char">I</span></button>
-            <button class="vk-btn" data-char="خ">خ<span class="latin-char">O</span></button>
-            <button class="vk-btn" data-char="ح">ح<span class="latin-char">P</span></button>
-            <button class="vk-btn" data-char="ض">ض<span class="latin-char">[</span></button>
-            <button class="vk-btn" data-char="ص">ص<span class="latin-char">]</span></button>
-            <button class="vk-btn btn-wide" data-char="\">\</button>
+            <button class="vk-btn btn-wide" data-normal="">Tab</button>
+            <button class="vk-btn" data-normal="ق" data-shift="Q">ق<span class="latin-char">Q</span></button>
+            <button class="vk-btn" data-normal="و" data-shift="W">و<span class="latin-char">W</span></button>
+            <button class="vk-btn" data-normal="ع" data-shift="E">ع<span class="latin-char">E</span></button>
+            <button class="vk-btn" data-normal="ر" data-shift="R">ر<span class="latin-char">R</span></button>
+            <button class="vk-btn" data-normal="ت" data-shift="T">ت<span class="latin-char">T</span></button>
+            <button class="vk-btn" data-normal="ي" data-shift="Y">ي<span class="latin-char">Y</span></button>
+            <button class="vk-btn" data-normal="ث" data-shift="U">ث<span class="latin-char">U</span></button>
+            <button class="vk-btn" data-normal="ء" data-shift="I">ء<span class="latin-char">I</span></button>
+            <button class="vk-btn" data-normal="خ" data-shift="O">خ<span class="latin-char">O</span></button>
+            <button class="vk-btn" data-normal="ح" data-shift="P">ح<span class="latin-char">P</span></button>
+            <button class="vk-btn" data-normal="ض" data-shift="{">ض<span class="latin-char">[</span></button>
+            <button class="vk-btn" data-normal="ص" data-shift="}">ص<span class="latin-char">]</span></button>
+            <button class="vk-btn btn-wide" data-normal="\" data-shift="|">\</button>
         </div>
 
         <!-- Baris ke-3: A S D F G H J K L ; ' Enter -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wider" data-char="">Caps</button>
-            <button class="vk-btn" data-char="ا">ا<span class="latin-char">A</span></button>
-            <button class="vk-btn" data-char="س">س<span class="latin-char">S</span></button>
-            <button class="vk-btn" data-char="د">د<span class="latin-char">D</span></button>
-            <button class="vk-btn" data-char="ف">ف<span class="latin-char">F</span></button>
-            <button class="vk-btn" data-char="غ">غ<span class="latin-char">G</span></button>
-            <button class="vk-btn" data-char="ه">ه<span class="latin-char">H</span></button>
-            <button class="vk-btn" data-char="ج">ج<span class="latin-char">J</span></button>
-            <button class="vk-btn" data-char="ك">ك<span class="latin-char">K</span></button>
-            <button class="vk-btn" data-char="ل">ل<span class="latin-char">L</span></button>
-            <button class="vk-btn" data-char="ظ">ظ<span class="latin-char">;</span></button>
-            <button class="vk-btn" data-char="ط">ط<span class="latin-char">'</span></button>
-            <button class="vk-btn btn-widest" data-char="\n">Enter ↵</button>
+            <button class="vk-btn btn-wider" data-normal="">Caps</button>
+            <button class="vk-btn" data-normal="ا" data-shift="A">ا<span class="latin-char">A</span></button>
+            <button class="vk-btn" data-normal="س" data-shift="S">س<span class="latin-char">S</span></button>
+            <button class="vk-btn" data-normal="د" data-shift="D">د<span class="latin-char">D</span></button>
+            <button class="vk-btn" data-normal="ف" data-shift="F">ف<span class="latin-char">F</span></button>
+            <button class="vk-btn" data-normal="غ" data-shift="G">غ<span class="latin-char">G</span></button>
+            <button class="vk-btn" data-normal="ه" data-shift="H">ه<span class="latin-char">H</span></button>
+            <button class="vk-btn" data-normal="ج" data-shift="J">ج<span class="latin-char">J</span></button>
+            <button class="vk-btn" data-normal="ك" data-shift="K">ك<span class="latin-char">K</span></button>
+            <button class="vk-btn" data-normal="ل" data-shift="L">ل<span class="latin-char">L</span></button>
+            <button class="vk-btn" data-normal="ظ" data-shift=":">ظ<span class="latin-char">;</span></button>
+            <button class="vk-btn" data-normal="ط" data-shift='"'>ط<span class="latin-char">'</span></button>
+            <button class="vk-btn btn-widest" data-normal="\n">Enter ↵</button>
         </div>
 
         <!-- Baris ke-4: Shift Z X C V B N M , . / Shift -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-widest" data-char="">Shift</button>
-            <button class="vk-btn" data-char="ز">ز<span class="latin-char">Z</span></button>
-            <button class="vk-btn" data-char="ل">ل<span class="latin-char">X</span></button>
-            <button class="vk-btn" data-char="ذ">ذ<span class="latin-char">C</span></button>
-            <button class="vk-btn" data-char="ب">ب<span class="latin-char">V</span></button>
-            <button class="vk-btn" data-char="ش">ش<span class="latin-char">B</span></button>
-            <button class="vk-btn" data-char="ن">ن<span class="latin-char">N</span></button>
-            <button class="vk-btn" data-char="م">م<span class="latin-char">M</span></button>
-            <button class="vk-btn" data-char="ة">ة<span class="latin-char">,</span></button>
-            <button class="vk-btn" data-char="ؤ">ؤ<span class="latin-char">.</span></button>
-            <button class="vk-btn" data-char="ؤ">ؤ<span class="latin-char">/</span></button>
-            <button class="vk-btn btn-widest" data-char="">Shift</button>
+            <button class="vk-btn btn-widest shift-key" id="shiftLeft">Shift</button>
+            <button class="vk-btn" data-normal="ز" data-shift="Z">ز<span class="latin-char">Z</span></button>
+            <button class="vk-btn" data-normal="ل" data-shift="X">ل<span class="latin-char">X</span></button>
+            <button class="vk-btn" data-normal="ذ" data-shift="C">ذ<span class="latin-char">C</span></button>
+            <button class="vk-btn" data-normal="ب" data-shift="V">ب<span class="latin-char">V</span></button>
+            <button class="vk-btn" data-normal="ش" data-shift="B">ش<span class="latin-char">B</span></button>
+            <button class="vk-btn" data-normal="ن" data-shift="N">ن<span class="latin-char">N</span></button>
+            <button class="vk-btn" data-normal="م" data-shift="M">م<span class="latin-char">M</span></button>
+            <button class="vk-btn" data-normal="ة" data-shift="<">ة<span class="latin-char">,</span></button>
+            <button class="vk-btn" data-normal="ؤ" data-shift=">">ؤ<span class="latin-char">.</span></button>
+            <button class="vk-btn" data-normal="ؤ" data-shift="?">ؤ<span class="latin-char">/</span></button>
+            <button class="vk-btn btn-widest shift-key" id="shiftRight">Shift</button>
         </div>
 
         <!-- Baris Bawah (Spasi, dll) -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wide" data-char="">Ctrl</button>
-            <button class="vk-btn btn-wide" data-char="">Win</button>
-            <button class="vk-btn btn-wide" data-char="">Alt</button>
-            <button class="vk-btn btn-space" data-char=" ">Spasi (Space)</button>
-            <button class="vk-btn btn-wide" data-char="">Alt</button>
-            <button class="vk-btn btn-wide" data-char="">Ctrl</button>
+            <button class="vk-btn btn-wide" data-normal="">Ctrl</button>
+            <button class="vk-btn btn-wide" data-normal="">Win</button>
+            <button class="vk-btn btn-wide" data-normal="">Alt</button>
+            <button class="vk-btn btn-space" data-normal=" ">Spasi (Space)</button>
+            <button class="vk-btn btn-wide" data-normal="">Alt</button>
+            <button class="vk-btn btn-wide" data-normal="">Ctrl</button>
         </div>
 
     </div>
@@ -268,24 +274,43 @@
 
 <script>
     const inputArea = document.getElementById('arabicInput');
-    const buttons = document.querySelectorAll('.vk-btn');
+    const buttons = document.querySelectorAll('.vk-btn:not(.shift-key)');
+    const shiftButtons = document.querySelectorAll('.shift-key');
     
-    buttons.forEach(button => {
-        let charToInsert = button.getAttribute('data-char');
-        let specialAction = button.getAttribute('data-special');
+    let isShiftActive = false;
 
-        if (charToInsert !== null && charToInsert !== '') {
+    // Logika tombol Shift (bisa ditekan untuk mengaktifkan mode shift)
+    shiftButtons.forEach(shiftBtn => {
+        shiftBtn.addEventListener('pointerdown', function(e) {
+            e.preventDefault();
+            isShiftActive = !isShiftActive;
+            shiftButtons.forEach(sb => {
+                if (isShiftActive) sb.classList.add('shift-active');
+                else sb.classList.remove('shift-active');
+            });
+        });
+    });
+
+    // Logika tombol keyboard regular dan fungsi
+    buttons.forEach(button => {
+        let normalChar = button.getAttribute('data-normal');
+        let shiftChar = button.getAttribute('data-shift');
+
+        if (normalChar !== null && normalChar !== '') {
             button.addEventListener('pointerdown', function(e) {
                 e.preventDefault();
+                
+                // Tentukan karakter yang diketik berdasarkan status Shift aktif atau tidak
+                let charToInsert = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
+                
                 insertText(charToInsert);
                 triggerEffect(button);
-            });
-        } else if (specialAction === 'tasydid') {
-            // Penanganan khusus untuk Syaddah/Tasydid (Unicode U+0651)
-            button.addEventListener('pointerdown', function(e) {
-                e.preventDefault();
-                insertText('\u0651');
-                triggerEffect(button);
+
+                // Setelah tombol diketik, otomatis matikan kembali status shift (seperti keyboard fisik)
+                if (isShiftActive) {
+                    isShiftActive = false;
+                    shiftButtons.forEach(sb => sb.classList.remove('shift-active'));
+                }
             });
         }
     });
