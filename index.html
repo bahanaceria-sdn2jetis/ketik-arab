@@ -273,6 +273,37 @@
 </div>
 
 <script>
+    // ==========================================
+    // KONFIGURASI ADMIN (GOOGLE SHEETS WEB APP)
+    // ==========================================
+    const SCRIPT_URL = https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec; 
+    // Contoh: "https://script.google.com/macros/s/AKfycby.../exec"
+
+    // Fungsi untuk mengirim log secara otomatis ke Google Sheets admin
+    function trackUser(activityName) {
+        if (SCRIPT_URL.includes("MASUKKAN_URL")) return; // Abaikan jika belum disetting
+        
+        let payload = {
+            activity: activityName,
+            userAgent: navigator.userAgent
+        };
+
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).catch(err => console.log("Log error"));
+    }
+
+    // Catat saat halaman pertama kali dibuka oleh pengguna
+    window.addEventListener("DOMContentLoaded", () => {
+        trackUser("Membuka Website Ketik Arab");
+    });
+
+    // ------------------------------------------
+    // KODE UTAMA KEYBOARD
+    // ------------------------------------------
     const inputArea = document.getElementById('arabicInput');
     const buttons = document.querySelectorAll('.vk-btn:not(.shift-key)');
     const shiftButtons = document.querySelectorAll('.shift-key');
@@ -300,7 +331,6 @@
                 
                 let targetChar = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
                 
-                // Penanganan khusus untuk harakat gabungan (misal F7 dengan shift = Tasydid + alif kecil/panjang)
                 if (targetChar === 'aa') targetChar = 'َا';
                 else if (targetChar === 'ii') targetChar = 'ِي';
                 else if (targetChar === 'uu') targetChar = 'ُو';
@@ -308,7 +338,6 @@
                 else if (targetChar === 'ّii') targetChar = 'ِّي';
                 else if (targetChar === 'ّuu') targetChar = 'ُّو';
                 else if (targetChar.startsWith('ّ') && targetChar.length > 1) {
-                    // Format Unicode untuk Tasydid (U+0651) + Harakat pilihan
                     targetChar = '\u0651' + targetChar.substring(1);
                 }
 
