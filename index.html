@@ -276,33 +276,36 @@
     // ==========================================
     // KONFIGURASI ADMIN (GOOGLE SHEETS WEB APP)
     // ==========================================
-    const SCRIPT_URL = https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec; 
-    // Contoh: "https://script.google.com/macros/s/AKfycby.../exec"
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec"; 
 
-    // Fungsi untuk mengirim log secara otomatis ke Google Sheets admin
     function trackUser(activityName) {
-        if (SCRIPT_URL.includes("MASUKKAN_URL")) return; // Abaikan jika belum disetting
+        if (!SCRIPT_URL || SCRIPT_URL.includes("MASUKKAN_URL")) return;
         
-        let payload = {
+        let data = {
             activity: activityName,
             userAgent: navigator.userAgent
         };
 
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        }).catch(err => console.log("Log error"));
+        // Menggunakan navigator.sendBeacon agar tidak memblokir atau merusak fungsi tombol
+        if (navigator.sendBeacon) {
+            let blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            navigator.sendBeacon(SCRIPT_URL, blob);
+        } else {
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(data),
+                keepalive: true
+            }).catch(() => {});
+        }
     }
 
-    // Catat saat halaman pertama kali dibuka oleh pengguna
+    // Catat saat halaman dibuka
     window.addEventListener("DOMContentLoaded", () => {
         trackUser("Membuka Website Ketik Arab");
     });
 
     // ------------------------------------------
-    // KODE UTAMA KEYBOARD
+    // KODE UTAMA KEYBOARD (DIPERBAIKI)
     // ------------------------------------------
     const inputArea = document.getElementById('arabicInput');
     const buttons = document.querySelectorAll('.vk-btn:not(.shift-key)');
@@ -311,7 +314,7 @@
     let isShiftActive = false;
 
     shiftButtons.forEach(shiftBtn => {
-        shiftBtn.addEventListener('pointerdown', function(e) {
+        shiftBtn.addEventListener('click', function(e) {
             e.preventDefault();
             isShiftActive = !isShiftActive;
             shiftButtons.forEach(sb => {
@@ -326,7 +329,8 @@
         let shiftChar = button.getAttribute('data-shift');
 
         if (normalChar !== null && normalChar !== '') {
-            button.addEventListener('pointerdown', function(e) {
+            // Menggunakan event 'click' agar kompatibel penuh di semua jenis HP
+            button.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 let targetChar = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
