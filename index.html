@@ -109,7 +109,6 @@
             transform: translateY(2px);
             box-shadow: none;
         }
-        /* Huruf Latin kecil penanda di pojok tombol (sesuai gambar) */
         .latin-char {
             font-family: sans-serif;
             font-size: 9px;
@@ -134,20 +133,22 @@
             border-radius: 6px;
         }
         .vk-btn-func {
-            background-color: #bdc3c7;
-            color: #111;
-            height: 32px;
+            background-color: #f1c40f;
+            color: #2c3e50;
+            height: 36px;
             font-size: 10px;
             font-family: sans-serif;
             flex: 1;
             max-width: none;
             font-weight: bold;
+            border-bottom-width: 3px;
+            border-color: #d4ac0d;
         }
 
         @media (max-width: 600px) {
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
             .latin-char { font-size: 8px; }
-            .vk-btn-func { font-size: 9px; height: 28px; }
+            .vk-btn-func { font-size: 9px; height: 32px; }
             textarea { height: 80px; font-size: 24px; }
         }
     </style>
@@ -155,7 +156,7 @@
 <body>
 
 <div class="container">
-    <h2>Ketik Arab Nonosoft Khot (Sesuai Layout Gambar)</h2>
+    <h2>Ketik Arab Nonosoft Khot (Sesuai Gambar)</h2>
 
     <div class="toolbar">
         <button class="btn-action" onclick="clearText()">Hapus Semua</button>
@@ -164,10 +165,9 @@
 
     <textarea id="arabicInput" placeholder="Sentuh tombol di bawah untuk mengetik..."></textarea>
 
-    <!-- Area Keyboard Virtual Berdasarkan Susunan Gambar Asli -->
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Harakat) -->
+        <!-- Baris F1 - F12 (Harakat Nonosoft Khot) -->
         <div class="keyboard-row function-row">
             <button class="vk-btn vk-btn-func" data-char="\u064E">F1<br>َ Fathah</button>
             <button class="vk-btn vk-btn-func" data-char="\u0650">F2<br>ِ Kasrah</button>
@@ -183,7 +183,7 @@
             <button class="vk-btn vk-btn-func" data-char="">F12</button>
         </div>
 
-        <!-- Baris Angka & Simbol Atas (Sesuai Gambar) -->
+        <!-- Baris Angka & Simbol Atas -->
         <div class="keyboard-row">
             <button class="vk-btn" data-char="ى">ى<span class="latin-char">`</span></button>
             <button class="vk-btn" data-char="١">١<span class="latin-char">1</span></button>
@@ -201,7 +201,7 @@
             <button class="vk-btn btn-wide" onclick="backspace()">Back</button>
         </div>
 
-        <!-- Baris ke-2: Q W E R T Y U I O P [ ] \ (Sesuai Gambar Nonosoft) -->
+        <!-- Baris ke-2: Q W E R T Y U I O P [ ] \ -->
         <div class="keyboard-row">
             <button class="vk-btn btn-wide" data-char="">Tab</button>
             <button class="vk-btn" data-char="ق">ق<span class="latin-char">Q</span></button>
@@ -219,7 +219,7 @@
             <button class="vk-btn btn-wide" data-char="\">\</button>
         </div>
 
-        <!-- Baris ke-3: A S D F G H J K L ; ' Enter (Sesuai Gambar Nonosoft) -->
+        <!-- Baris ke-3: A S D F G H J K L ; ' Enter -->
         <div class="keyboard-row">
             <button class="vk-btn btn-wider" data-char="">Caps</button>
             <button class="vk-btn" data-char="ا">ا<span class="latin-char">A</span></button>
@@ -236,7 +236,7 @@
             <button class="vk-btn btn-widest" data-char="\n">Enter ↵</button>
         </div>
 
-        <!-- Baris ke-4: Shift Z X C V B N M , . / Shift (Sesuai Gambar Nonosoft) -->
+        <!-- Baris ke-4: Shift Z X C V B N M , . / Shift -->
         <div class="keyboard-row">
             <button class="vk-btn btn-widest" data-char="">Shift</button>
             <button class="vk-btn" data-char="ز">ز<span class="latin-char">Z</span></button>
@@ -267,25 +267,20 @@
 
 <script>
     const inputArea = document.getElementById('arabicInput');
-
-    // Menggunakan event listener berbasis 'touchstart' dan 'click' agar sangat responsif di HP
     const buttons = document.querySelectorAll('.vk-btn');
     
     buttons.forEach(button => {
         let charToInsert = button.getAttribute('data-char');
         if (charToInsert !== null && charToInsert !== '') {
-            // Mencegah penundaan klik di perangkat mobile (touch delay)
-            button.addEventListener('touchend', function(e) {
+            // Menggunakan fungsi mousedown & touchstart agar langsung merespons di HP maupun PC
+            const handlePress = (e) => {
                 e.preventDefault();
                 insertText(charToInsert);
                 triggerEffect(button);
-            });
-            button.addEventListener('click', function(e) {
-                // Hanya jalankan jika bukan dari sentuhan untuk menghindari double trigger di beberapa browser
-                if (!e.sourceCapabilities || !e.sourceCapabilities.firesTouchEvents) {
-                    insertText(charToInsert);
-                }
-            });
+            };
+
+            button.addEventListener('touchstart', handlePress, {passive: false});
+            button.addEventListener('mousedown', handlePress);
         }
     });
 
