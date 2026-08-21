@@ -64,7 +64,6 @@
         }
         .btn-action:active { background-color: #922b21; }
 
-        /* --- Area Keyboard Virtual --- */
         .keyboard-layout {
             background-color: #95a5a6; 
             padding: 8px;
@@ -124,13 +123,11 @@
             left: 3px;
         }
         
-        /* Ukuran tombol khusus */
         .btn-wide { flex: 1.5; max-width: 75px; font-size: 12px; font-family: sans-serif; }
         .btn-wider { flex: 1.8; max-width: 85px; font-size: 12px; font-family: sans-serif; }
         .btn-widest { flex: 2.2; max-width: 100px; font-size: 12px; font-family: sans-serif; }
         .btn-space { flex: 6; max-width: 320px; height: 45px; font-family: sans-serif; font-size: 14px; }
         
-        /* Baris Tombol Fungsi F1-F12 */
         .function-row {
             justify-content: space-between;
             margin-bottom: 10px;
@@ -167,26 +164,26 @@
 
     <div class="toolbar">
         <button class="btn-action" onclick="clearText()">Hapus Semua</button>
-        <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">← Hapus 1 Karakter</button>
+        <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
     <textarea id="arabicInput" placeholder="Sentuh huruf, lalu pilih harakat di atas..."></textarea>
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 Sesuai Tabel Panduan Nonosoft Khot -->
+        <!-- Baris F1 - F12 (Menggunakan Kode Aman) -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-normal="َ" data-shift="َّ">F1<br>َ / ّ+َ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ِ" data-shift="ِّ">F2<br>ِ / ّ+ِ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ُ" data-shift="ُّ">F3<br>ُ / ّ+ُ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ً" data-shift="ًّ">F4<br>ً / ّ+ً</button>
-            <button class="vk-btn vk-btn-func" data-normal="ٍ" data-shift="ٍّ">F5<br>ٍ / ّ+ٍ</button>
-            <button class="vk-btn vk-btn-func" data-normal="ٌ" data-shift="ٌّ">F6<br>ٌ / ّ+ٌ</button>
-            <button class="vk-btn vk-btn-func" data-normal="aa" data-shift="ّaa">F7<br>aa / ّ+aa</button>
-            <button class="vk-btn vk-btn-func" data-normal="ii" data-shift="ّii">F8<br>ii / ّ+ii</button>
-            <button class="vk-btn vk-btn-func" data-normal="uu" data-shift="ّuu">F9<br>uu / ّ+uu</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="ٰ">F10<br>Mad<br>Jaiz</button>
-            <button class="vk-btn vk-btn-func" data-normal="ْ" data-shift="">F11<br>Sukun</button>
+            <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1<br>&#064E; / &#0651;&#064E;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2<br>&#0650; / &#0651;&#0650;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f3" data-shift="sf3">F3<br>&#064F; / &#0651;&#064F;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4">F4<br>&#064B; / &#0651;&#064B;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5">F5<br>&#064D; / &#0651;&#064D;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6">F6<br>&#064C; / &#0651;&#064C;</button>
+            <button class="vk-btn vk-btn-func" data-normal="aa" data-shift="saa">F7<br>aa / &#0651;+aa</button>
+            <button class="vk-btn vk-btn-func" data-normal="ii" data-shift="sii">F8<br>ii / &#0651;+ii</button>
+            <button class="vk-btn vk-btn-func" data-normal="uu" data-shift="suu">F9<br>uu / &#0651;+uu</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="f10">F10<br>Mad<br>Jaiz</button>
+            <button class="vk-btn vk-btn-func" data-normal="f11" data-shift="">F11<br>Sukun</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
         </div>
 
@@ -240,7 +237,7 @@
             <button class="vk-btn" data-normal="ل" data-shift="L">ل<span class="latin-char">L</span></button>
             <button class="vk-btn" data-normal="ظ" data-shift=":">ظ<span class="latin-char">;</span></button>
             <button class="vk-btn" data-normal="ط" data-shift='"'>ط<span class="latin-char">'</span></button>
-            <button class="vk-btn btn-widest" data-normal="\n">Enter ↵</button>
+            <button class="vk-btn btn-widest" data-normal="\n">Enter &#8529;</button>
         </div>
 
         <!-- Baris ke-4 -->
@@ -273,16 +270,14 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec";
+    var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec";
 
-    function trackUser(activityName) {
+    function trackUser(act) {
         if (!SCRIPT_URL || SCRIPT_URL.indexOf("MASUKKAN_URL") !== -1) return;
-        var data = { activity: activityName, userAgent: navigator.userAgent };
+        var data = { activity: act, userAgent: navigator.userAgent };
         if (navigator.sendBeacon) {
             var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             navigator.sendBeacon(SCRIPT_URL, blob);
-        } else {
-            fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(data), keepalive: true }).catch(function(){});
         }
     }
 
@@ -295,31 +290,41 @@
     var shiftButtons = document.querySelectorAll('.shift-key');
     var isShiftActive = false;
 
-    shiftButtons.forEach(function(shiftBtn) {
-        shiftBtn.addEventListener('click', function(e) {
+    shiftButtons.forEach(function(sb) {
+        sb.addEventListener('click', function(e) {
             e.preventDefault();
             isShiftActive = !isShiftActive;
-            shiftButtons.forEach(function(sb) {
-                if (isShiftActive) sb.classList.add('shift-active');
-                else sb.classList.remove('shift-active');
+            shiftButtons.forEach(function(btn) {
+                if (isShiftActive) btn.classList.add('shift-active');
+                else btn.classList.remove('shift-active');
             });
         });
     });
 
-    function resolveArabicChar(rawChar) {
-        if (rawChar === 'aa') return '\u064E\u0627';
-        if (rawChar === 'ii') return '\u0650\u064A';
-        if (rawChar === 'uu') return '\u064F\u0648';
-        if (rawChar === 'ّaa') return '\u0651\u064E\u0627';
-        if (rawChar === 'ّii') return '\u0651\u0650\u064A';
-        if (rawChar === 'ّuu') return '\u0651\u064F\u0648';
-        if (rawChar === 'َّ') return '\u0651\u064E';
-        if (rawChar === 'ِّ') return '\u0651\u0650';
-        if (rawChar === 'ُّ') return '\u0651\u064F';
-        if (rawChar === 'ًّ') return '\u0651\u064B';
-        if (rawChar === 'ٍّ') return '\u0651\u064D';
-        if (rawChar === 'ٌّ') return '\u0651\u064C';
-        return rawChar;
+    function resolveArabicChar(code) {
+        switch (code) {
+            case 'f1':  return '\u064E';
+            case 'sf1': return '\u0651\u064E';
+            case 'f2':  return '\u0650';
+            case 'sf2': return '\u0651\u0650';
+            case 'f3':  return '\u064F';
+            case 'sf3': return '\u0651\u064F';
+            case 'f4':  return '\u064B';
+            case 'sf4': return '\u0651\u064B';
+            case 'f5':  return '\u064D';
+            case 'sf5': return '\u0651\u064D';
+            case 'f6':  return '\u064C';
+            case 'sf6': return '\u0651\u064C';
+            case 'aa':  return '\u064E\u0627';
+            case 'saa': return '\u0651\u064E\u0627';
+            case 'ii':  return '\u0650\u064A';
+            case 'sii': return '\u0651\u0650\u064A';
+            case 'uu':  return '\u064F\u0648';
+            case 'suu': return '\u0651\u064F\u0648';
+            case 'f10': return '\u0670';
+            case 'f11': return '\u0652';
+            default:    return code;
+        }
     }
 
     buttons.forEach(function(button) {
@@ -333,7 +338,6 @@
                 var finalChar = resolveArabicChar(rawTarget);
 
                 insertText(finalChar);
-                triggerEffect(button);
 
                 if (isShiftActive) {
                     isShiftActive = false;
@@ -342,11 +346,6 @@
             });
         }
     });
-
-    function triggerEffect(btn) {
-        btn.classList.add('touched');
-        setTimeout(function() { btn.classList.remove('touched'); }, 150);
-    }
 
     function insertText(text) {
         var start = inputArea.selectionStart;
