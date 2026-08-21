@@ -322,15 +322,15 @@
         });
     }
 
-    // Peta Unicode Harakat Presisi (Sesuai Koreksi: Shift+F10 = Mad, Ctrl+F10 = Tasydid)
+    // Pemetaan Unicode Harakat
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
         
-        // --- KHUSUS F10 (SUDAH DIREVISI) ---
+        // --- KHUSUS F10 ---
         if (k === 'f10') {
-            if (isShift) return '\u0653'; // Shift + F10  -> MAD
-            if (isCtrl)  return '\u0651'; // Ctrl + F10   -> TASYDID
-            return '\u0653';             // F10 Tunggal  -> MAD
+            if (isShift) return '\u0653'; // Shift + F10 -> MAD JAIZ
+            if (isCtrl)  return '\u0651'; // Ctrl + F10  -> TASYDID
+            return '\u0653';             // F10 Tunggal -> MAD JAIZ
         }
 
         // --- HARAKAT BERASOSIASI TASYDID (Shift + F1 s/d F9) ---
