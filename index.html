@@ -9,14 +9,15 @@
     <meta name="theme-color" content="#2d3436">
     <link rel="manifest" href="manifest.json">
 
-    <!-- Cadangan Online Font; jika offline akan menggunakan font sistem jika font lokal tidak dipasang -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Arab dengan Rendering Harakat Terbaik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* Fallback Font jika Offline & Font Amiri belum di-cache */
         @font-face {
             font-family: 'Amiri Local';
-            src: local('Amiri'), local('Traditional Arabic'), local('Arial');
+            src: local('Amiri Quran'), local('Amiri'), local('Traditional Arabic'), local('Arial');
         }
 
         body {
@@ -47,9 +48,10 @@
         }
         textarea {
             width: 100%;
-            height: 100px;
-            font-family: 'Amiri', 'Amiri Local', 'Traditional Arabic', serif;
-            font-size: 28px;
+            height: 120px;
+            font-family: 'Amiri Quran', 'Amiri', 'Amiri Local', 'Traditional Arabic', serif;
+            font-size: 32px;
+            line-height: 2.2;
             direction: rtl;
             text-align: right;
             padding: 10px;
@@ -96,7 +98,7 @@
             border: 1px solid #bdc3c7;
             border-bottom-width: 3px;
             color: #2c3e50;
-            font-family: 'Amiri', 'Amiri Local', 'Traditional Arabic', serif;
+            font-family: 'Amiri Quran', 'Amiri', 'Traditional Arabic', serif;
             font-size: 22px;
             font-weight: bold;
             border-radius: 5px;
@@ -165,7 +167,7 @@
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
             .latin-char { font-size: 8px; }
             .vk-btn-func { font-size: 10px; height: 36px; }
-            textarea { height: 80px; font-size: 24px; }
+            textarea { height: 90px; font-size: 26px; line-height: 2; }
         }
     </style>
 </head>
@@ -179,22 +181,22 @@
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" inputmode="none" placeholder="Sentuh huruf pada keyboard di bawah..."></textarea>
+    <textarea id="arabicInput" placeholder="Ketik atau sentuh huruf pada keyboard di bawah..."></textarea>
 
     <div class="keyboard-layout">
         
         <!-- Baris F1 - F12 -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1</button>
-            <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2</button>
-            <button class="vk-btn vk-btn-func" data-normal="f3" data-shift="sf3">F3</button>
-            <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4">F4</button>
-            <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5">F5</button>
-            <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6">F6</button>
+            <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1" data-ctrl="cf1">F1</button>
+            <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2" data-ctrl="cf2">F2</button>
+            <button class="vk-btn vk-btn-func" data-normal="f3" data-shift="sf3" data-ctrl="cf3">F3</button>
+            <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4" data-ctrl="cf4">F4</button>
+            <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5" data-ctrl="cf5">F5</button>
+            <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6" data-ctrl="cf6">F6</button>
             <button class="vk-btn vk-btn-func" data-normal="f7" data-shift="sf7">F7</button>
             <button class="vk-btn vk-btn-func" data-normal="f8" data-shift="sf8">F8</button>
             <button class="vk-btn vk-btn-func" data-normal="f9" data-shift="sf9">F9</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="f10">F10</button>
+            <button class="vk-btn vk-btn-func" data-normal="f10" data-shift="sf10" data-ctrl="cf10">F10</button>
             <button class="vk-btn vk-btn-func" data-normal="f11" data-shift="">F11</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
         </div>
@@ -264,7 +266,7 @@
             <button class="vk-btn" data-normal="م" data-shift="M">م<span class="latin-char">M</span></button>
             <button class="vk-btn" data-normal="ة" data-shift="<">ة<span class="latin-char">,</span></button>
             <button class="vk-btn" data-normal="ؤ" data-shift=">">ؤ<span class="latin-char">.</span></button>
-            <button class="vk-btn" data-normal="ؤ" data-shift="?">ؤ<span class="latin-char">/</span></button>
+            <button class="vk-btn" data-normal="ئ" data-shift="?">ئ<span class="latin-char">/</span></button>
             <button class="vk-btn btn-widest shift-key" id="shiftRight">Shift</button>
         </div>
 
@@ -284,7 +286,6 @@
 <script>
     var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec";
 
-    // Manajemen Tracking Offline-to-Online
     function sendData(data) {
         if (navigator.sendBeacon) {
             var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
@@ -301,7 +302,6 @@
             sendData(data);
             flushOfflineLogs();
         } else {
-            // Simpan log ke Storage lokal jika sedang offline
             var logs = JSON.parse(localStorage.getItem('pending_logs') || '[]');
             logs.push(data);
             localStorage.setItem('pending_logs', JSON.stringify(logs));
@@ -322,7 +322,6 @@
         trackUser("Membuka Website Ketik Arab");
     });
 
-    // Registrasi Service Worker untuk Offline Capabilities
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
             navigator.serviceWorker.register('./sw.js').then(function(reg) {
@@ -338,11 +337,6 @@
     var shiftButtons = document.querySelectorAll('.shift-key');
     var isShiftActive = false;
 
-    inputArea.addEventListener('focus', function(e) {
-        this.setAttribute('readonly', 'readonly');
-        setTimeout(() => { this.removeAttribute('readonly'); }, 100);
-    });
-
     shiftButtons.forEach(function(sb) {
         sb.addEventListener('click', function(e) {
             e.preventDefault();
@@ -354,28 +348,43 @@
         });
     });
 
+    // Peta Unicode Harakat Sesuai Gambar Rujukan
     function getUnicodeString(code) {
         switch (code) {
+            // Tunggal (F1 - F11)
             case 'f1':  return '\u064E';         // Fathah
-            case 'sf1': return '\u0651\u064E';     // Tasydid + Fathah
             case 'f2':  return '\u0650';         // Kasrah
-            case 'sf2': return '\u0651\u0650';     // Tasydid + Kasrah
             case 'f3':  return '\u064F';         // Dammah
-            case 'sf3': return '\u0651\u064F';     // Tasydid + Dammah
             case 'f4':  return '\u064B';         // Fathatan
-            case 'sf4': return '\u0651\u064B';     // Tasydid + Fathatan
             case 'f5':  return '\u064D';         // Kasratan
-            case 'sf5': return '\u0651\u064D';     // Tasydid + Kasratan
             case 'f6':  return '\u064C';         // Dammatan
-            case 'sf6': return '\u0651\u064C';     // Tasydid + Dammatan
-            case 'f7':  return '\u0670';         // Fathah Tegak
-            case 'sf7': return '\u0651\u0670';     // Tasydid + Fathah Tegak
+            case 'f7':  return '\u0670';         // Alif Khanfariah / Fathah Tegak
             case 'f8':  return '\u0656';         // Kasrah Tegak
-            case 'sf8': return '\u0651\u0656';     // Tasydid + Kasrah Tegak
             case 'f9':  return '\u0657';         // Dammah Terbalik
-            case 'sf9': return '\u0651\u0657';     // Tasydid + Dammah Terbalik
-            case 'f10': return '\u0653';         // Mad Jaiz
+            case 'f10': return '\u0653';         // Mad / Maddah
             case 'f11': return '\u0652';         // Sukun
+
+            // Shift + (F1 - F10) -> Tasydid / Hamzah Kombinasi
+            case 'sf1': return '\u0651\u064E';   // Tasydid + Fathah
+            case 'sf2': return '\u0651\u0650';   // Tasydid + Kasrah
+            case 'sf3': return '\u0651\u064F';   // Tasydid + Dammah
+            case 'sf4': return '\u0651\u064B';   // Tasydid + Fathatan
+            case 'sf5': return '\u0651\u064D';   // Tasydid + Kasratan
+            case 'sf6': return '\u0651\u064C';   // Tasydid + Dammatan
+            case 'sf7': return '\u0651\u0670';   // Tasydid + Fathah Tegak
+            case 'sf8': return '\u0651\u0656';   // Tasydid + Kasrah Tegak
+            case 'sf9': return '\u0651\u0654';   // Tasydid + Hamzah
+            case 'sf10': return '\u0651';        // Tasydid Standar
+
+            // Ctrl + (F1 - F10) -> Mad / Omitting Diacritics
+            case 'cf1': return '\u0653\u064E';   // Mad + Fathah
+            case 'cf2': return '\u0653\u0650';   // Mad + Kasrah
+            case 'cf3': return '\u0653\u064F';   // Mad + Dammah
+            case 'cf4': return '\u0653\u064B';   // Mad + Fathatan
+            case 'cf5': return '\u0653\u064D';   // Mad + Kasratan
+            case 'cf6': return '\u0653\u064C';   // Mad + Dammatan
+            case 'cf10': return '\u0670';        // Fathah Tegak (Ctrl+F10)
+            
             default:    return code;
         }
     }
@@ -432,6 +441,22 @@
         inputArea.value = '';
         inputArea.focus();
     }
+
+    // Penanganan Tombol Keyboard Komputer / Fisik
+    document.addEventListener('keydown', function(e) {
+        if (e.key.startsWith('F') && parseInt(e.key.substring(1)) >= 1 && parseInt(e.key.substring(1)) <= 12) {
+            e.preventDefault();
+            var fKey = e.key.toLowerCase();
+            var prefix = '';
+            if (e.shiftKey) prefix = 's';
+            else if (e.ctrlKey) prefix = 'c';
+            
+            var charToInsert = getUnicodeString(prefix + fKey);
+            if (charToInsert !== (prefix + fKey)) {
+                insertText(charToInsert);
+            }
+        }
+    });
 </script>
 
 </body>
