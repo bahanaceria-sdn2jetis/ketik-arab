@@ -322,52 +322,52 @@
         });
     }
 
-    // Pemetaan Unicode Harakat Berdasarkan Spesifikasi Nonosoft Khot
+    // Pemetaan Unicode Harakat Berdasarkan Tabel Gambar Resmi Nonosoft Khot
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
 
         // --- KOMBINASI SHIFT + F1 s/d F10 ---
         if (isShift) {
             switch(k) {
-                case 'f1':  return '\u0670'; // Fathah Kharijah / Fathah Tegak
-                case 'f2':  return '\u0650\u0656'; // Fathah diikuti Kasrah kecil (Tajwid)
-                case 'f3':  return '\u0657'; // Dammah Khasiyyah / Dammah Terbalik Panjang
-                case 'f4':  return '\u064B'; // Fathatain Variasi Miring Ganda
-                case 'f5':  return '\u064D'; // Kasratan Variasi Miring Ganda
-                case 'f6':  return '\u064C'; // Dammatan Variasi Al-Qur'an
-                case 'f7':  return '\u0670'; // Tanda baca Al-Qur'an (Mad kecil/Fathah pendek)
-                case 'f8':  return '\u0656'; // Harakat Berdiri di Bawah Huruf (Kasrah Tegak)
-                case 'f9':  return '\u064F\u0654'; // Tanda Hamzah di atas Harakat Dammah
-                case 'f10': return '\u0653'; // Maddah / Tanda Mad Panjang
+                case 'f1':  return '\u0651\u064E'; // Tasydid + Fathah ( َّ )
+                case 'f2':  return '\u0651\u0650'; // Tasydid + Kasrah ( ِّ )
+                case 'f3':  return '\u0651\u064F'; // Tasydid + Dammah ( ُّ )
+                case 'f4':  return '\u0651\u064B'; // Tasydid + Fathatain ( ًّ )
+                case 'f5':  return '\u0651\u064D'; // Tasydid + Kasratan ( ٍّ )
+                case 'f6':  return '\u0651\u064C'; // Tasydid + Dammatan ( ٌّ )
+                case 'f7':  return '\u0670';       // Fathah Tegak / Alif Khanfariah ( ٰ )
+                case 'f8':  return '\u0656';       // Kasrah Tegak ( ٖ )
+                case 'f9':  return '\u0657';       // Dammah Terbalik ( ٗ )
+                case 'f10': return '\u0653';       // Mad / Maddah ( ٓ )
             }
         }
         
         // --- KOMBINASI CTRL + F1 s/d F10 ---
         if (isCtrl) {
             switch(k) {
-                case 'f1':  return '\u0651'; // Shaddah / Tasydid
-                case 'f2':  return '\u0651\u0650'; // Shaddah + Kasrah
-                case 'f3':  return '\u0651\u064F'; // Shaddah + Dammah
-                case 'f4':  return '\u0651\u064B'; // Shaddah + Fathatain
-                case 'f5':  return '\u0651\u064D'; // Shaddah + Kasratan
-                case 'f6':  return '\u0651\u064C'; // Shaddah + Dammatan
-                case 'f10': return '\u0651\u064E'; // Shaddah + Fathah
+                case 'f1':  return '\u0651\u0670'; // Tasydid + Fathah Tegak ( ّٰ )
+                case 'f2':  return '\u0651\u0656'; // Tasydid + Kasrah Tegak ( ّ۪ )
+                case 'f3':  return '\u0651\u0657'; // Tasydid + Dammah Terbalik
+                case 'f4':  return '\u0651\u064B'; // Tasydid + Fathatain
+                case 'f5':  return '\u0651\u064D'; // Tasydid + Kasratan
+                case 'f6':  return '\u0651\u064C'; // Tasydid + Dammatan
+                case 'f10': return '\u0651';       // Tasydid saja ( ّ )
             }
         }
 
         // --- TOMBOL FUNGSI UTAMA (F1 s/d F11 Biasa) ---
         switch(k) {
-            case 'f1':  return '\u064E'; // Fathah
-            case 'f2':  return '\u0650'; // Kasrah
-            case 'f3':  return '\u064F'; // Dammah
-            case 'f4':  return '\u064B'; // Fathatain / Tanwin Fathah
-            case 'f5':  return '\u064D'; // Kasratan / Tanwin Kasrah
-            case 'f6':  return '\u064C'; // Dammatan / Tanwin Dammah
-            case 'f7':  return '\u0652'; // Sukun Koma Atas
-            case 'f8':  return '\u0656'; // Kasrah Tegak
-            case 'f9':  return '\u0657'; // Dammah Terbalik
-            case 'f10': return '\u0652'; // Sukun Biasa / Bulat
-            case 'f11': return '\u06E1'; // Sukun Bulat Kecil / Tanda Waqaf
+            case 'f1':  return '\u064E'; // Fathah ( َ )
+            case 'f2':  return '\u0650'; // Kasrah ( ِ )
+            case 'f3':  return '\u064F'; // Dammah ( ُ )
+            case 'f4':  return '\u064B'; // Fathatain ( ً )
+            case 'f5':  return '\u064D'; // Kasratan ( ٍ )
+            case 'f6':  return '\u064C'; // Dammatan ( ٌ )
+            case 'f7':  return '\u0651'; // Tasydid / Shaddah ( ّ )
+            case 'f8':  return '\u0670'; // Fathah Tegak ( ٰ )
+            case 'f9':  return '\u0656'; // Kasrah Tegak ( ٖ )
+            case 'f10': return '\u0653'; // Mad ( ٓ )
+            case 'f11': return '\u0652'; // Sukun ( ْ )
             default:    return null;
         }
     }
@@ -390,7 +390,6 @@
                 insertText(charToInsert);
             }
 
-            // Reset Shift dan Ctrl setelah karakter dimasukkan
             if (isShiftActive || isCtrlActive) {
                 isShiftActive = false;
                 isCtrlActive = false;
@@ -405,7 +404,7 @@
         if (keyLower.startsWith('f') && keyLower.length <= 3) {
             var unicodeChar = getHarakatUnicode(keyLower, e.shiftKey, e.ctrlKey);
             if (unicodeChar) {
-                e.preventDefault(); // Mencegah pintasan browser bawaan
+                e.preventDefault();
                 insertText(unicodeChar);
             }
         }
@@ -416,7 +415,7 @@
         var end = inputArea.selectionEnd;
         var val = inputArea.value;
 
-        if (text === '\\n') text = '\n';
+        if (text === '\n') text = '\n';
 
         inputArea.value = val.substring(0, start) + text + val.substring(end);
         var newPos = start + text.length;
@@ -444,12 +443,10 @@
         inputArea.focus();
     }
 
-    // Registrasi Service Worker PWA Offline
+    // Service Worker PWA Offline Registration
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('./sw.js')
-                .then(function() { console.log('PWA Service Worker aktif!'); })
-                .catch(function(err) { console.log('Gagal daftar SW:', err); });
+            navigator.serviceWorker.register('./sw.js');
         });
     }
 </script>
