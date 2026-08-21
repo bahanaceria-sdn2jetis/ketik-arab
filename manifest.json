@@ -1,8 +1,21 @@
 {
   "short_name": "KetikArab",
   "name": "Ketik Arab Nonosoft Khot",
-  "start_url": "./index.html",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3898/3898082.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3898/3898082.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
   "background_color": "#2d3436",
   "theme_color": "#2d3436",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "any"
 }
