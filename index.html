@@ -166,11 +166,12 @@
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" placeholder="Sentuh huruf, lalu pilih harakat di atas..."></textarea>
+    <!-- inputmode="none" mencegah keyboard bawaan HP/Tablet muncul -->
+    <textarea id="arabicInput" inputmode="none" placeholder="Sentuh huruf pada keyboard di bawah..."></textarea>
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 Bersih Tanpa Teks Simbol di Bawahnya -->
+        <!-- Baris F1 - F12 -->
         <div class="keyboard-row function-row">
             <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1</button>
             <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2</button>
@@ -288,6 +289,12 @@
     var buttons = document.querySelectorAll('.vk-btn:not(.shift-key)');
     var shiftButtons = document.querySelectorAll('.shift-key');
     var isShiftActive = false;
+
+    // Menangani peristiwa fokus/sentuh agar keyboard fisik HP menyembunyikan diri pada iOS/Android
+    inputArea.addEventListener('focus', function(e) {
+        this.setAttribute('readonly', 'readonly');
+        setTimeout(() => { this.removeAttribute('readonly'); }, 100);
+    });
 
     shiftButtons.forEach(function(sb) {
         sb.addEventListener('click', function(e) {
