@@ -296,7 +296,7 @@
         sb.addEventListener('click', function(e) {
             e.preventDefault();
             isShiftActive = !isShiftActive;
-            if (isShiftActive) isCtrlActive = false; // Nonaktifkan Ctrl jika Shift ditekan
+            if (isShiftActive) isCtrlActive = false;
             updateModifierStyles();
         });
     });
@@ -306,7 +306,7 @@
         cb.addEventListener('click', function(e) {
             e.preventDefault();
             isCtrlActive = !isCtrlActive;
-            if (isCtrlActive) isShiftActive = false; // Nonaktifkan Shift jika Ctrl ditekan
+            if (isCtrlActive) isShiftActive = false;
             updateModifierStyles();
         });
     });
@@ -351,7 +351,7 @@
                 case 'f4': return '\u0653\u064B'; // Mad + Fathatan
                 case 'f5': return '\u0653\u064D'; // Mad + Kasratan
                 case 'f6': return '\u0653\u064C'; // Mad + Dammatan
-                case 'f10': return '\u0670';     // Alif Khanfariah / Fathah Tegak (Ctrl+F10)
+                case 'f10': return '\u0670';     // Alif Khanfariah / Fathah Tegak
             }
         }
 
@@ -361,7 +361,6 @@
             case 'f2': return '\u0650'; // Kasrah
             case 'f3': return '\u064F'; // Dammah
             case 'f4': return '\u064B'; // Fathatan
-            case 'f5': return '\u0651\u064D'; // Kasratan (diatur presisi)
             case 'f5': return '\u064D'; // Kasratan
             case 'f6': return '\u064C'; // Dammatan
             case 'f7': return '\u0670'; // Fathah Tegak
@@ -443,6 +442,15 @@
     function clearText() {
         inputArea.value = '';
         inputArea.focus();
+    }
+
+    // Registrasi Service Worker PWA Offline
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./sw.js')
+                .then(function() { console.log('PWA Service Worker aktif!'); })
+                .catch(function(err) { console.log('Gagal daftar SW:', err); });
+        });
     }
 </script>
 
