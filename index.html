@@ -4,8 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ketik Arab Nonosoft Khot</title>
+    
+    <!-- PWA Setup -->
+    <meta name="theme-color" content="#2d3436">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Cadangan Online Font; jika offline akan menggunakan font sistem jika font lokal tidak dipasang -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
+        /* Fallback Font jika Offline & Font Amiri belum di-cache */
+        @font-face {
+            font-family: 'Amiri Local';
+            src: local('Amiri'), local('Traditional Arabic'), local('Arial');
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #2d3436;
@@ -35,7 +48,7 @@
         textarea {
             width: 100%;
             height: 100px;
-            font-family: 'Amiri', serif;
+            font-family: 'Amiri', 'Amiri Local', 'Traditional Arabic', serif;
             font-size: 28px;
             direction: rtl;
             text-align: right;
@@ -83,7 +96,7 @@
             border: 1px solid #bdc3c7;
             border-bottom-width: 3px;
             color: #2c3e50;
-            font-family: 'Amiri', serif;
+            font-family: 'Amiri', 'Amiri Local', 'Traditional Arabic', serif;
             font-size: 22px;
             font-weight: bold;
             border-radius: 5px;
@@ -166,7 +179,6 @@
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
-    <!-- inputmode="none" mencegah keyboard bawaan HP/Tablet muncul -->
     <textarea id="arabicInput" inputmode="none" placeholder="Sentuh huruf pada keyboard di bawah..."></textarea>
 
     <div class="keyboard-layout">
@@ -272,25 +284,60 @@
 <script>
     var SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-f_EDZ_cFLoSGX1JIl8LkZ_gL1M9QV1UUibpJcsK3Qc9XgATQP4bae8MgNZgMWJMn7g/exec";
 
-    function trackUser(act) {
-        if (!SCRIPT_URL || SCRIPT_URL.indexOf("MASUKKAN_URL") !== -1) return;
-        var data = { activity: act, userAgent: navigator.userAgent };
+    // Manajemen Tracking Offline-to-Online
+    function sendData(data) {
         if (navigator.sendBeacon) {
             var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-            navigator.sendBeacon(SCRIPT_URL, blob);
+            return navigator.sendBeacon(SCRIPT_URL, blob);
+        }
+        return false;
+    }
+
+    function trackUser(act) {
+        if (!SCRIPT_URL || SCRIPT_URL.indexOf("MASUKKAN_URL") !== -1) return;
+        var data = { activity: act, userAgent: navigator.userAgent, time: new Date().toISOString() };
+        
+        if (navigator.onLine) {
+            sendData(data);
+            flushOfflineLogs();
+        } else {
+            // Simpan log ke Storage lokal jika sedang offline
+            var logs = JSON.parse(localStorage.getItem('pending_logs') || '[]');
+            logs.push(data);
+            localStorage.setItem('pending_logs', JSON.stringify(logs));
         }
     }
+
+    function flushOfflineLogs() {
+        var logs = JSON.parse(localStorage.getItem('pending_logs') || '[]');
+        if (logs.length > 0 && navigator.onLine) {
+            logs.forEach(function(item) { sendData(item); });
+            localStorage.removeItem('pending_logs');
+        }
+    }
+
+    window.addEventListener("online", flushOfflineLogs);
 
     window.addEventListener("DOMContentLoaded", function() {
         trackUser("Membuka Website Ketik Arab");
     });
+
+    // Registrasi Service Worker untuk Offline Capabilities
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./sw.js').then(function(reg) {
+                console.log('Service Worker terdaftar:', reg.scope);
+            }).catch(function(err) {
+                console.log('Registrasi SW gagal:', err);
+            });
+        });
+    }
 
     var inputArea = document.getElementById('arabicInput');
     var buttons = document.querySelectorAll('.vk-btn:not(.shift-key)');
     var shiftButtons = document.querySelectorAll('.shift-key');
     var isShiftActive = false;
 
-    // Menangani peristiwa fokus/sentuh agar keyboard fisik HP menyembunyikan diri pada iOS/Android
     inputArea.addEventListener('focus', function(e) {
         this.setAttribute('readonly', 'readonly');
         setTimeout(() => { this.removeAttribute('readonly'); }, 100);
