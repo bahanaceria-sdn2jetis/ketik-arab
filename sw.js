@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nonosoft-khot-v2';
+const CACHE_NAME = 'nonosoft-khot-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
