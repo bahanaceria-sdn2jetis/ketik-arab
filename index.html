@@ -154,7 +154,7 @@
             background-color: #f1c40f;
             color: #2c3e50;
             height: 40px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: sans-serif;
             flex: 1;
             max-width: none;
@@ -164,9 +164,9 @@
         }
 
         @media (max-width: 600px) {
-            .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
+            .vk-btn { font-size: 18px; height: 42px; min-width: 24px; }
             .latin-char { font-size: 8px; }
-            .vk-btn-func { font-size: 10px; height: 36px; }
+            .vk-btn-func { font-size: 9px; height: 36px; }
             textarea { height: 90px; font-size: 28px; line-height: 2; }
         }
     </style>
@@ -181,11 +181,11 @@
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" placeholder="Ketik huruf lalu gunakan F1-F10 (atau Shift/Ctrl + F1-F10)..."></textarea>
+    <textarea id="arabicInput" placeholder="Ketik huruf lalu gunakan F1-F11 (atau Shift/Ctrl + F1-F11)..."></textarea>
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F10 -->
+        <!-- Baris F1 - F11 -->
         <div class="keyboard-row function-row">
             <button class="vk-btn vk-btn-func" data-code="f1">F1</button>
             <button class="vk-btn vk-btn-func" data-code="f2">F2</button>
@@ -197,6 +197,7 @@
             <button class="vk-btn vk-btn-func" data-code="f8">F8</button>
             <button class="vk-btn vk-btn-func" data-code="f9">F9</button>
             <button class="vk-btn vk-btn-func" data-code="f10">F10</button>
+            <button class="vk-btn vk-btn-func" data-code="f11">F11</button>
         </div>
 
         <!-- Baris Angka & Simbol Atas -->
@@ -321,29 +322,29 @@
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
 
-        // --- KOMBINASI CTRL + (F1 - F10) ---
+        // --- KOMBINASI CTRL + (F1 - F11) ---
         if (isCtrl) {
             switch(k) {
-                case 'f1':  return '\u0653\u0670'; // Mad + Fathah Tegak
-                case 'f2':  return '\u0653\u0656'; // Mad + Kasrah Tegak
-                case 'f3':  return '\u0653\u0657'; // Mad + Dammah Terbalik
-                case 'f4':  return '\u0653\u0651\u0670'; // Mad + Tasydid + Fathah Tegak
-                case 'f5':  return '\u0653\u0651\u0656'; // Mad + Tasydid + Kasrah Tegak
-                case 'f6':  return '\u0653\u0651\u0657'; // Mad + Tasydid + Dammah Terbalik
+                case 'f1':  return '\u0653\u0670'; // Mad Jaiz + Fathah Tegak
+                case 'f2':  return '\u0653\u0656'; // Mad Jaiz + Kasrah Tegak
+                case 'f3':  return '\u0653\u0657'; // Mad Jaiz + Dammah Terbalik
+                case 'f4':  return '\u0653\u0651\u0670'; // Mad Jaiz + Tasydid + Fathah Tegak
+                case 'f5':  return '\u0653\u0651\u0656'; // Mad Jaiz + Tasydid + Kasrah Tegak
+                case 'f6':  return '\u0653\u0651\u0657'; // Mad Jaiz + Tasydid + Dammah Terbalik
                 case 'f10': return '\u0651';       // Tasydid
                 default:    return null;
             }
         }
 
-        // --- KOMBINASI SHIFT + (F1 - F10) ---
+        // --- KOMBINASI SHIFT + (F1 - F11) ---
         if (isShift) {
             switch(k) {
                 case 'f1':  return '\u0651\u064E'; // Tasydid + Fathah
                 case 'f2':  return '\u0651\u0650'; // Tasydid + Kasrah
                 case 'f3':  return '\u0651\u064F'; // Tasydid + Dammah
-                case 'f4':  return '\u0651\u064B'; // Tasydid + Fathatain
-                case 'f5':  return '\u0651\u064D'; // Tasydid + Kasratain
-                case 'f6':  return '\u0651\u064C'; // Tasydid + Dammatain
+                case 'f4':  return '\u0651\u064B'; // Tasydid + Fathahain
+                case 'f5':  return '\u0651\u064D'; // Tasydid + Kasrahain
+                case 'f6':  return '\u0651\u064C'; // Tasydid + Dammahain
                 case 'f7':  return '\u0651\u0670'; // Tasydid + Fathah Tegak
                 case 'f8':  return '\u0651\u0656'; // Tasydid + Kasrah Tegak
                 case 'f9':  return '\u0651\u0657'; // Tasydid + Dammah Terbalik
@@ -352,18 +353,19 @@
             }
         }
 
-        // --- TOMBOL FUNGSI UTAMA (F1 - F10 Biasa) ---
+        // --- TOMBOL FUNGSI UTAMA (F1 - F11 Biasa) ---
         switch(k) {
             case 'f1':  return '\u064E'; // Fathah
             case 'f2':  return '\u0650'; // Kasrah
             case 'f3':  return '\u064F'; // Dammah
-            case 'f4':  return '\u064B'; // Fathatain
-            case 'f5':  return '\u064D'; // Kasratain
-            case 'f6':  return '\u064C'; // Dammatain
+            case 'f4':  return '\u064B'; // Fathah Tanwin
+            case 'f5':  return '\u064D'; // Kasrah Tanwin
+            case 'f6':  return '\u064C'; // Dammah Tanwin
             case 'f7':  return '\u0670'; // Fathah Tegak
             case 'f8':  return '\u0656'; // Kasrah Tegak
             case 'f9':  return '\u0657'; // Dammah Terbalik
-            case 'f10': return '';       // Biasa (Tidak ada harakat)
+            case 'f10': return '';       // Biasa (Tidak ada)
+            case 'f11': return '\u0652'; // Sukun
             default:    return null;
         }
     }
