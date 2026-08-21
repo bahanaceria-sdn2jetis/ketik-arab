@@ -139,20 +139,19 @@
             background-color: #f1c40f;
             color: #2c3e50;
             height: 40px;
-            font-size: 9px;
+            font-size: 12px;
             font-family: sans-serif;
             flex: 1;
             max-width: none;
             font-weight: bold;
             border-bottom-width: 3px;
             border-color: #d4ac0d;
-            line-height: 1.2;
         }
 
         @media (max-width: 600px) {
             .vk-btn { font-size: 18px; height: 42px; min-width: 26px; }
             .latin-char { font-size: 8px; }
-            .vk-btn-func { font-size: 8px; height: 36px; }
+            .vk-btn-func { font-size: 10px; height: 36px; }
             textarea { height: 80px; font-size: 24px; }
         }
     </style>
@@ -171,19 +170,19 @@
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 Sesuai Gambar -->
+        <!-- Baris F1 - F12 Bersih Tanpa Teks Simbol di Bawahnya -->
         <div class="keyboard-row function-row">
-            <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1<br>&#064E; / &#0651;&#064E;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2<br>&#0650; / &#0651;&#0650;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f3" data-shift="sf3">F3<br>&#064F; / &#0651;&#064F;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4">F4<br>&#064B; / &#0651;&#064B;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5">F5<br>&#064D; / &#0651;&#064D;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6">F6<br>&#064C; / &#0651;&#064C;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f7" data-shift="sf7">F7<br>&#0628;&#0670; / &#0628;&#0651;&#0670;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f8" data-shift="sf8">F8<br>&#0628;&#0656; / &#0628;&#0651;&#0656;</button>
-            <button class="vk-btn vk-btn-func" data-normal="f9" data-shift="sf9">F9<br>&#0628;&#0657; / &#0628;&#0651;&#0657;</button>
-            <button class="vk-btn vk-btn-func" data-normal="" data-shift="f10">F10<br>Mad<br>Jaiz</button>
-            <button class="vk-btn vk-btn-func" data-normal="f11" data-shift="">F11<br>Sukun</button>
+            <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1</button>
+            <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2</button>
+            <button class="vk-btn vk-btn-func" data-normal="f3" data-shift="sf3">F3</button>
+            <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4">F4</button>
+            <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5">F5</button>
+            <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6">F6</button>
+            <button class="vk-btn vk-btn-func" data-normal="f7" data-shift="sf7">F7</button>
+            <button class="vk-btn vk-btn-func" data-normal="f8" data-shift="sf8">F8</button>
+            <button class="vk-btn vk-btn-func" data-normal="f9" data-shift="sf9">F9</button>
+            <button class="vk-btn vk-btn-func" data-normal="" data-shift="f10">F10</button>
+            <button class="vk-btn vk-btn-func" data-normal="f11" data-shift="">F11</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
         </div>
 
@@ -315,16 +314,13 @@
             case 'sf5': return '\u0651\u064D';     // Tasydid + Kasratan
             case 'f6':  return '\u064C';         // Dammatan
             case 'sf6': return '\u0651\u064C';     // Tasydid + Dammatan
-            
-            // --- F7, F8, F9 Sesuai Gambar Lampiran ---
-            case 'f7':  return '\u0670';         // Fathah Tegak (Dagger Alif)
+            case 'f7':  return '\u0670';         // Fathah Tegak
             case 'sf7': return '\u0651\u0670';     // Tasydid + Fathah Tegak
-            case 'f8':  return '\u0656';         // Kasrah Tegak (Subscript Alef)
+            case 'f8':  return '\u0656';         // Kasrah Tegak
             case 'sf8': return '\u0651\u0656';     // Tasydid + Kasrah Tegak
-            case 'f9':  return '\u0657';         // Dammah Terbalik (Inverted Damma)
+            case 'f9':  return '\u0657';         // Dammah Terbalik
             case 'sf9': return '\u0651\u0657';     // Tasydid + Dammah Terbalik
-            
-            case 'f10': return '\u0653';         // Maddah / Mad Jaiz
+            case 'f10': return '\u0653';         // Mad Jaiz
             case 'f11': return '\u0652';         // Sukun
             default:    return code;
         }
