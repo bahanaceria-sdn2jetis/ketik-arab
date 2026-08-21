@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#2d3436">
     <link rel="manifest" href="manifest.json">
 
-    <!-- Font khusus rendering harakat & tasydid presisi (Nonosoft Khot Style) -->
+    <!-- Font khusus rendering harakat & tasydid presisi -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
@@ -124,6 +124,11 @@
             color: white !important;
             border-color: #d35400 !important;
         }
+        .vk-btn.ctrl-active {
+            background-color: #2980b9 !important;
+            color: white !important;
+            border-color: #1f618d !important;
+        }
         .latin-char {
             font-family: sans-serif;
             font-size: 9px;
@@ -176,7 +181,7 @@
         <button class="btn-action" style="background-color: #d35400;" onclick="backspace()">&#8592; Hapus 1 Karakter</button>
     </div>
 
-    <textarea id="arabicInput" placeholder="Ketik huruf lalu tekan F1-F11 (atau Shift + F1-F10)..."></textarea>
+    <textarea id="arabicInput" placeholder="Ketik huruf lalu gunakan F1-F11 (atau Shift/Ctrl + F1-F10)..."></textarea>
 
     <div class="keyboard-layout">
         
@@ -251,7 +256,7 @@
 
         <!-- Baris ke-4 -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-widest shift-key" id="shiftLeft">Shift</button>
+            <button class="vk-btn btn-widest shift-key">Shift</button>
             <button class="vk-btn" data-normal="ز" data-shift="Z">ز<span class="latin-char">Z</span></button>
             <button class="vk-btn" data-normal="ل" data-shift="X">ل<span class="latin-char">X</span></button>
             <button class="vk-btn" data-normal="ذ" data-shift="C">ذ<span class="latin-char">C</span></button>
@@ -262,17 +267,17 @@
             <button class="vk-btn" data-normal="ة" data-shift="<">ة<span class="latin-char">,</span></button>
             <button class="vk-btn" data-normal="ؤ" data-shift=">">ؤ<span class="latin-char">.</span></button>
             <button class="vk-btn" data-normal="ئ" data-shift="?">ئ<span class="latin-char">/</span></button>
-            <button class="vk-btn btn-widest shift-key" id="shiftRight">Shift</button>
+            <button class="vk-btn btn-widest shift-key">Shift</button>
         </div>
 
         <!-- Baris Bawah -->
         <div class="keyboard-row">
-            <button class="vk-btn btn-wide">Ctrl</button>
+            <button class="vk-btn btn-wide ctrl-key">Ctrl</button>
             <button class="vk-btn btn-wide">Win</button>
             <button class="vk-btn btn-wide">Alt</button>
             <button class="vk-btn btn-space" data-normal=" ">Spasi (Space)</button>
             <button class="vk-btn btn-wide">Alt</button>
-            <button class="vk-btn btn-wide">Ctrl</button>
+            <button class="vk-btn btn-wide ctrl-key">Ctrl</button>
         </div>
 
     </div>
@@ -281,21 +286,43 @@
 <script>
     var inputArea = document.getElementById('arabicInput');
     var shiftButtons = document.querySelectorAll('.shift-key');
+    var ctrlButtons = document.querySelectorAll('.ctrl-key');
+    
     var isShiftActive = false;
+    var isCtrlActive = false;
 
-    // Toggle tombol Shift layar
+    // Toggle Shift Layar
     shiftButtons.forEach(function(sb) {
         sb.addEventListener('click', function(e) {
             e.preventDefault();
             isShiftActive = !isShiftActive;
-            shiftButtons.forEach(function(btn) {
-                if (isShiftActive) btn.classList.add('shift-active');
-                else btn.classList.remove('shift-active');
-            });
+            if (isShiftActive) isCtrlActive = false; // Nonaktifkan Ctrl jika Shift ditekan
+            updateModifierStyles();
         });
     });
 
-    // Peta Unicode Harakat & Tasydid (Presisi Nonosoft Khot)
+    // Toggle Ctrl Layar
+    ctrlButtons.forEach(function(cb) {
+        cb.addEventListener('click', function(e) {
+            e.preventDefault();
+            isCtrlActive = !isCtrlActive;
+            if (isCtrlActive) isShiftActive = false; // Nonaktifkan Shift jika Ctrl ditekan
+            updateModifierStyles();
+        });
+    });
+
+    function updateModifierStyles() {
+        shiftButtons.forEach(function(btn) {
+            if (isShiftActive) btn.classList.add('shift-active');
+            else btn.classList.remove('shift-active');
+        });
+        ctrlButtons.forEach(function(btn) {
+            if (isCtrlActive) btn.classList.add('ctrl-active');
+            else btn.classList.remove('ctrl-active');
+        });
+    }
+
+    // Peta Unicode Harakat, Tasydid, dan Mad (Presisi Gambar Nonosoft Khot)
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
         
@@ -311,11 +338,11 @@
                 case 'f7': return '\u0651\u0670'; // Tasydid + Fathah Tegak
                 case 'f8': return '\u0651\u0656'; // Tasydid + Kasrah Tegak
                 case 'f9': return '\u0651\u0657'; // Tasydid + Dammah Terbalik
-                case 'f10': return '\u0651';      // Tasydid saja
+                case 'f10': return '\u0651';      // Tasydid Saja
             }
         }
         
-        // Peta Mad Kombinasi (Ctrl + F1 s/d F6, F10)
+        // Peta Mad Kombinasi (Ctrl + F1 s/d F6 & F10)
         if (isCtrl) {
             switch(k) {
                 case 'f1': return '\u0653\u064E'; // Mad + Fathah
@@ -324,7 +351,7 @@
                 case 'f4': return '\u0653\u064B'; // Mad + Fathatan
                 case 'f5': return '\u0653\u064D'; // Mad + Kasratan
                 case 'f6': return '\u0653\u064C'; // Mad + Dammatan
-                case 'f10': return '\u0670';     // Alif Khanfariah / Fathah Tegak
+                case 'f10': return '\u0670';     // Alif Khanfariah / Fathah Tegak (Ctrl+F10)
             }
         }
 
@@ -334,6 +361,7 @@
             case 'f2': return '\u0650'; // Kasrah
             case 'f3': return '\u064F'; // Dammah
             case 'f4': return '\u064B'; // Fathatan
+            case 'f5': return '\u0651\u064D'; // Kasratan (diatur presisi)
             case 'f5': return '\u064D'; // Kasratan
             case 'f6': return '\u064C'; // Dammatan
             case 'f7': return '\u0670'; // Fathah Tegak
@@ -345,42 +373,40 @@
         }
     }
 
-    // Klik tombol pada Keyboard Layar
+    // Klik Tombol Virtual Keyboard
     document.querySelectorAll('.vk-btn').forEach(function(button) {
         button.addEventListener('click', function(e) {
             e.preventDefault();
-            if (this.classList.contains('shift-key')) return;
+            if (this.classList.contains('shift-key') || this.classList.contains('ctrl-key')) return;
 
             var code = this.getAttribute('data-code');
             var normalChar = this.getAttribute('data-normal');
             var shiftChar = this.getAttribute('data-shift');
 
-            // Jika tombol F1-F12
             if (code) {
-                var unicodeChar = getHarakatUnicode(code, isShiftActive, false);
+                var unicodeChar = getHarakatUnicode(code, isShiftActive, isCtrlActive);
                 if (unicodeChar) insertText(unicodeChar);
-            } 
-            // Jika tombol huruf/angka
-            else if (normalChar !== null) {
+            } else if (normalChar !== null) {
                 var charToInsert = (isShiftActive && shiftChar) ? shiftChar : normalChar;
                 insertText(charToInsert);
             }
 
-            // Reset status Shift setelah klik
-            if (isShiftActive) {
+            // Reset Shift dan Ctrl setelah karakter dimasukkan
+            if (isShiftActive || isCtrlActive) {
                 isShiftActive = false;
-                shiftButtons.forEach(function(sb) { sb.classList.remove('shift-active'); });
+                isCtrlActive = false;
+                updateModifierStyles();
             }
         });
     });
 
-    // Mengetik lewat Keyboard Komputer / Fisik
+    // Mengetik via Keyboard Fisik Komputer
     document.addEventListener('keydown', function(e) {
         var keyLower = e.key.toLowerCase();
         if (keyLower.startsWith('f') && keyLower.length <= 3) {
             var unicodeChar = getHarakatUnicode(keyLower, e.shiftKey, e.ctrlKey);
             if (unicodeChar) {
-                e.preventDefault();
+                e.preventDefault(); // Mencegah pintasan browser bawaan
                 insertText(unicodeChar);
             }
         }
