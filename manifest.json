@@ -1,0 +1,8 @@
+{
+  "short_name": "KetikArab",
+  "name": "Ketik Arab Nonosoft Khot",
+  "start_url": "./index.html",
+  "background_color": "#2d3436",
+  "theme_color": "#2d3436",
+  "display": "standalone"
+}
