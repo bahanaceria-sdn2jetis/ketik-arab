@@ -171,7 +171,7 @@
 
     <div class="keyboard-layout">
         
-        <!-- Baris F1 - F12 (Menggunakan Kode Aman) -->
+        <!-- Baris F1 - F12 Sesuai Gambar -->
         <div class="keyboard-row function-row">
             <button class="vk-btn vk-btn-func" data-normal="f1" data-shift="sf1">F1<br>&#064E; / &#0651;&#064E;</button>
             <button class="vk-btn vk-btn-func" data-normal="f2" data-shift="sf2">F2<br>&#0650; / &#0651;&#0650;</button>
@@ -179,9 +179,9 @@
             <button class="vk-btn vk-btn-func" data-normal="f4" data-shift="sf4">F4<br>&#064B; / &#0651;&#064B;</button>
             <button class="vk-btn vk-btn-func" data-normal="f5" data-shift="sf5">F5<br>&#064D; / &#0651;&#064D;</button>
             <button class="vk-btn vk-btn-func" data-normal="f6" data-shift="sf6">F6<br>&#064C; / &#0651;&#064C;</button>
-            <button class="vk-btn vk-btn-func" data-normal="aa" data-shift="saa">F7<br>aa / &#0651;+aa</button>
-            <button class="vk-btn vk-btn-func" data-normal="ii" data-shift="sii">F8<br>ii / &#0651;+ii</button>
-            <button class="vk-btn vk-btn-func" data-normal="uu" data-shift="suu">F9<br>uu / &#0651;+uu</button>
+            <button class="vk-btn vk-btn-func" data-normal="f7" data-shift="sf7">F7<br>&#0628;&#0670; / &#0628;&#0651;&#0670;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f8" data-shift="sf8">F8<br>&#0628;&#0656; / &#0628;&#0651;&#0656;</button>
+            <button class="vk-btn vk-btn-func" data-normal="f9" data-shift="sf9">F9<br>&#0628;&#0657; / &#0628;&#0651;&#0657;</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="f10">F10<br>Mad<br>Jaiz</button>
             <button class="vk-btn vk-btn-func" data-normal="f11" data-shift="">F11<br>Sukun</button>
             <button class="vk-btn vk-btn-func" data-normal="" data-shift="">F12</button>
@@ -301,28 +301,31 @@
         });
     });
 
-    function resolveArabicChar(code) {
+    function getUnicodeString(code) {
         switch (code) {
-            case 'f1':  return '\u064E';
-            case 'sf1': return '\u0651\u064E';
-            case 'f2':  return '\u0650';
-            case 'sf2': return '\u0651\u0650';
-            case 'f3':  return '\u064F';
-            case 'sf3': return '\u0651\u064F';
-            case 'f4':  return '\u064B';
-            case 'sf4': return '\u0651\u064B';
-            case 'f5':  return '\u064D';
-            case 'sf5': return '\u0651\u064D';
-            case 'f6':  return '\u064C';
-            case 'sf6': return '\u0651\u064C';
-            case 'aa':  return '\u064E\u0627';
-            case 'saa': return '\u0651\u064E\u0627';
-            case 'ii':  return '\u0650\u064A';
-            case 'sii': return '\u0651\u0650\u064A';
-            case 'uu':  return '\u064F\u0648';
-            case 'suu': return '\u0651\u064F\u0648';
-            case 'f10': return '\u0670';
-            case 'f11': return '\u0652';
+            case 'f1':  return '\u064E';         // Fathah
+            case 'sf1': return '\u0651\u064E';     // Tasydid + Fathah
+            case 'f2':  return '\u0650';         // Kasrah
+            case 'sf2': return '\u0651\u0650';     // Tasydid + Kasrah
+            case 'f3':  return '\u064F';         // Dammah
+            case 'sf3': return '\u0651\u064F';     // Tasydid + Dammah
+            case 'f4':  return '\u064B';         // Fathatan
+            case 'sf4': return '\u0651\u064B';     // Tasydid + Fathatan
+            case 'f5':  return '\u064D';         // Kasratan
+            case 'sf5': return '\u0651\u064D';     // Tasydid + Kasratan
+            case 'f6':  return '\u064C';         // Dammatan
+            case 'sf6': return '\u0651\u064C';     // Tasydid + Dammatan
+            
+            // --- F7, F8, F9 Sesuai Gambar Lampiran ---
+            case 'f7':  return '\u0670';         // Fathah Tegak (Dagger Alif)
+            case 'sf7': return '\u0651\u0670';     // Tasydid + Fathah Tegak
+            case 'f8':  return '\u0656';         // Kasrah Tegak (Subscript Alef)
+            case 'sf8': return '\u0651\u0656';     // Tasydid + Kasrah Tegak
+            case 'f9':  return '\u0657';         // Dammah Terbalik (Inverted Damma)
+            case 'sf9': return '\u0651\u0657';     // Tasydid + Dammah Terbalik
+            
+            case 'f10': return '\u0653';         // Maddah / Mad Jaiz
+            case 'f11': return '\u0652';         // Sukun
             default:    return code;
         }
     }
@@ -335,7 +338,7 @@
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 var rawTarget = (isShiftActive && shiftChar !== null && shiftChar !== '') ? shiftChar : normalChar;
-                var finalChar = resolveArabicChar(rawTarget);
+                var finalChar = getUnicodeString(rawTarget);
 
                 insertText(finalChar);
 
