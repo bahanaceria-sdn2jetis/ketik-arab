@@ -322,11 +322,11 @@
         });
     }
 
-    // Peta Unicode Harakat, Tasydid, dan Mad (Presisi Gambar Nonosoft Khot)
+    // Peta Unicode Harakat Presisi Tabel Nonosoft Khot
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
         
-        // Peta Tasydid Kombinasi (Shift + F1 s/d F10)
+        // Kombinasi Shift + F1 s/d F10 (Tasydid + Harakat)
         if (isShift) {
             switch(k) {
                 case 'f1': return '\u0651\u064E'; // Tasydid + Fathah
@@ -342,16 +342,16 @@
             }
         }
         
-        // Peta Mad Kombinasi (Ctrl + F1 s/d F6 & F10)
+        // Kombinasi Ctrl + F1 s/d F6 & F10 (Tanda Mad/Maddah)
         if (isCtrl) {
             switch(k) {
-                case 'f1': return '\u0653\u064E'; // Mad + Fathah
-                case 'f2': return '\u0653\u0650'; // Mad + Kasrah
-                case 'f3': return '\u0653\u064F'; // Mad + Dammah
-                case 'f4': return '\u0653\u064B'; // Mad + Fathatan
-                case 'f5': return '\u0653\u064D'; // Mad + Kasratan
-                case 'f6': return '\u0653\u064C'; // Mad + Dammatan
-                case 'f10': return '\u0670';     // Alif Khanfariah / Fathah Tegak
+                case 'f1': return '\u0653'; // Mad atas Fathah
+                case 'f2': return '\u0653'; // Mad bawah Kasrah
+                case 'f3': return '\u0653'; // Mad atas Dammah
+                case 'f4': return '\u0653'; // Mad atas Fathatan
+                case 'f5': return '\u0653'; // Mad bawah Kasratan
+                case 'f6': return '\u0653'; // Mad atas Dammatan
+                case 'f10': return '\u0653';// Mad Saja
             }
         }
 
@@ -363,10 +363,10 @@
             case 'f4': return '\u064B'; // Fathatan
             case 'f5': return '\u064D'; // Kasratan
             case 'f6': return '\u064C'; // Dammatan
-            case 'f7': return '\u0670'; // Fathah Tegak
+            case 'f7': return '\u0670'; // Fathah Tegak / Alif Khanfariah
             case 'f8': return '\u0656'; // Kasrah Tegak
             case 'f9': return '\u0657'; // Dammah Terbalik
-            case 'f10': return '\u0653';// Mad
+            case 'f10': return '\u0653';// Mad Saja
             case 'f11': return '\u0652';// Sukun
             default: return null;
         }
