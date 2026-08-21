@@ -321,7 +321,7 @@
     function getHarakatUnicode(key, isShift, isCtrl) {
         var k = key.toLowerCase();
 
-        // --- KOMBINASI CTRL + F1 s/d F10 ---
+        // --- KOMBINASI CTRL + (F1 - F10) ---
         if (isCtrl) {
             switch(k) {
                 case 'f1':  return '\u0653\u0670'; // Mad + Fathah Tegak
@@ -335,7 +335,7 @@
             }
         }
 
-        // --- KOMBINASI SHIFT + F1 s/d F10 ---
+        // --- KOMBINASI SHIFT + (F1 - F10) ---
         if (isShift) {
             switch(k) {
                 case 'f1':  return '\u0651\u064E'; // Tasydid + Fathah
@@ -352,7 +352,7 @@
             }
         }
 
-        // --- TOMBOL FUNGSI UTAMA (F1 s/d F10 Biasa) ---
+        // --- TOMBOL FUNGSI UTAMA (F1 - F10 Biasa) ---
         switch(k) {
             case 'f1':  return '\u064E'; // Fathah
             case 'f2':  return '\u0650'; // Kasrah
@@ -363,7 +363,7 @@
             case 'f7':  return '\u0670'; // Fathah Tegak
             case 'f8':  return '\u0656'; // Kasrah Tegak
             case 'f9':  return '\u0657'; // Dammah Terbalik
-            case 'f10': return '';       // Biasa (Tidak Ada)
+            case 'f10': return '';       // Biasa (Tidak ada harakat)
             default:    return null;
         }
     }
