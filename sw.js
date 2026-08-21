@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nonosoft-khot-v6';
+const CACHE_NAME = 'nonosoft-khot-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,9 +8,7 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
   );
   self.skipWaiting();
 });
@@ -20,9 +18,7 @@ self.addEventListener('activate', (e) => {
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
       );
     })
@@ -33,10 +29,7 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(e.request);
+      return cachedResponse || fetch(e.request);
     })
   );
 });
