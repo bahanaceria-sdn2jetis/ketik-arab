@@ -1,29 +1,29 @@
-const CACHE_NAME = 'ketik-arab-v2';
-const URLS_TO_CACHE = [
+const CACHE_NAME = 'nonosoft-khot-v1';
+const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   'https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap'
 ];
 
-// Install Service Worker & Simpan Cache
-self.addEventListener('install', (event) => {
-  event.waitUntil(
+// Install Service Worker & Cache Assets
+self.addEventListener('install', (e) => {
+  e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(URLS_TO_CACHE);
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
   self.skipWaiting();
 });
 
-// Aktivasi & Hapus Cache Lama jika ada Update
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
+// Activate & Hapus Cache Lama
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            return caches.delete(cache);
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
           }
         })
       );
@@ -32,11 +32,14 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Ambil resource dari Cache jika Offline
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+// Fetch Strategy: Cache First, Then Network
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(e.request);
     })
   );
 });
